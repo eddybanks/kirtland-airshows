@@ -1,0 +1,18 @@
+version: '3'
+services:
+  prisma:
+    image: prismagraphql/prisma:1.30
+    restart: always
+    ports:
+    - "4466:4466"
+    environment:
+      PRISMA_CONFIG: |
+        port: 4466
+        # uncomment the next line and provide the env var PRISMA_MANAGEMENT_API_SECRET=my-secret to activate cluster security
+        # managementApiSecret: my-secret
+        databases:
+          default:
+            connector: mongo
+            schema: kirtland_logistics
+            uri: >-
+              mongodb+srv://edwin:kirtland123@cluster0-e8yzz.mongodb.net/test?retryWrites=true

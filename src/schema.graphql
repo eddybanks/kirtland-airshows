@@ -1,0 +1,59 @@
+type Query {
+  info: String!
+  airshows: [Airshow!]!
+  zones: [Zone!]!
+  parking_lots: [ParkingLot!]!
+  tracking: [Tracking!]!
+}
+
+type Mutation {
+  createAirshow(name: String!, date: String!): Airshow!
+}
+
+type Airshow {
+  id: ID!
+  name: String!
+  date: String!
+}
+
+type Zone {
+  id: ID!
+  name: String!
+  lot_count: Int!
+}
+
+type ParkingLot {
+  id: ID!
+  name: String!
+  address: [Address!]!
+  vehicle_capacity: Int!
+  estimated_travel_distance: Int
+  estimated_travel_time: Int
+  zone: Zone!
+}
+
+type Address {
+  id: ID!
+  address_line: String!
+  address_line_two: String
+  zipcode: String!
+  city: String!
+  state: String!
+}
+
+type Tracking {
+  id: ID!
+  airshow: Airshow!
+  parking_lot: ParkingLot
+  zone: Zone
+  vehicle_count: Int!
+  bus_count: Int!
+  passenger_count: Int!
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+}

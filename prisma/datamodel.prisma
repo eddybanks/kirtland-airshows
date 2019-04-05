@@ -1,0 +1,57 @@
+type Airshow {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  date: String!
+}
+
+type Zone {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  lot_count: Int!
+}
+
+type ParkingLot {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  address: [Address!]!
+  vehicle_capacity: Int!
+  estimated_travel_distance: Int
+  estimated_travel_time: Int
+  zone: Zone!
+}
+
+type Address {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  address_line: String!
+  address_line_two: String
+  zipcode: String!
+  city: String!
+  state: String!
+}
+
+type Tracking {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  airshow: Airshow!
+  parking_lot: ParkingLot
+  zone: Zone
+  vehicle_count: Int!
+  bus_count: Int!
+  passenger_count: Int!
+}
+
+type User {
+  id: ID! @unique
+  name: String!
+  email: String! @unique
+  password: String!
+}
