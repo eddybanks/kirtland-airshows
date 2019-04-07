@@ -4,22 +4,29 @@ type Query {
   zones: [Zone!]!
   parking_lots: [ParkingLot!]!
   tracking: [Tracking!]!
+  users: [User]
 }
 
 type Mutation {
-  createAirshow(name: String!, date: String!): Airshow!
+  createAirshow(name: String!, date: String!, createdBy: User!): Airshow!
+  signup(email: String!, password: String!, name: String!): AuthPayLoad
+  login(email: String!, password: String!): AuthPayLoad
 }
 
 type Airshow {
   id: ID!
   name: String!
   date: String!
+  createdBy: User!
+  updatedBy: [User]
 }
 
 type Zone {
   id: ID!
   name: String!
   lot_count: Int!
+  createdBy: User!
+  updatedBy: [User]
 }
 
 type ParkingLot {
@@ -30,6 +37,8 @@ type ParkingLot {
   estimated_travel_distance: Int
   estimated_travel_time: Int
   zone: Zone!
+  createdBy: User!
+  updatedBy: [User]
 }
 
 type Address {
@@ -49,11 +58,25 @@ type Tracking {
   vehicle_count: Int!
   bus_count: Int!
   passenger_count: Int!
+  createdBy: User!
+  updatedBy: [User]
 }
 
 type User {
   id: ID!
   name: String!
   email: String!
-  password: String!
+  created_airshows: [Airshow] 
+  created_parking_lots: [ParkingLot] 
+  created_zones: [Zone]
+  created_tracking: [Tracking]
+  edited_airshows: [Airshow]
+  edited_parking_lots: [ParkingLot]
+  edited_zones: [Zone]
+  edited_tracking: [Tracking]
+}
+
+type AuthPayLoad {
+  token: String
+  user: User
 }

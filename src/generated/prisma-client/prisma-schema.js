@@ -403,6 +403,8 @@ type Airshow {
   updatedAt: DateTime!
   name: String!
   date: String!
+  createdBy: User!
+  updatedBy(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
 }
 
 type AirshowConnection {
@@ -417,11 +419,41 @@ input AirshowCreateInput {
   updatedAt: DateTime!
   name: String!
   date: String!
+  createdBy: UserCreateOneWithoutCreated_airshowsInput!
+  updatedBy: UserCreateManyWithoutEdited_airshowsInput
+}
+
+input AirshowCreateManyWithoutCreatedByInput {
+  create: [AirshowCreateWithoutCreatedByInput!]
+  connect: [AirshowWhereUniqueInput!]
+}
+
+input AirshowCreateManyWithoutUpdatedByInput {
+  create: [AirshowCreateWithoutUpdatedByInput!]
+  connect: [AirshowWhereUniqueInput!]
 }
 
 input AirshowCreateOneInput {
   create: AirshowCreateInput
   connect: AirshowWhereUniqueInput
+}
+
+input AirshowCreateWithoutCreatedByInput {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  date: String!
+  updatedBy: UserCreateManyWithoutEdited_airshowsInput
+}
+
+input AirshowCreateWithoutUpdatedByInput {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  date: String!
+  createdBy: UserCreateOneWithoutCreated_airshowsInput!
 }
 
 type AirshowEdge {
@@ -450,6 +482,70 @@ type AirshowPreviousValues {
   date: String!
 }
 
+input AirshowScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  date: String
+  date_not: String
+  date_in: [String!]
+  date_not_in: [String!]
+  date_lt: String
+  date_lte: String
+  date_gt: String
+  date_gte: String
+  date_contains: String
+  date_not_contains: String
+  date_starts_with: String
+  date_not_starts_with: String
+  date_ends_with: String
+  date_not_ends_with: String
+  AND: [AirshowScalarWhereInput!]
+  OR: [AirshowScalarWhereInput!]
+  NOT: [AirshowScalarWhereInput!]
+}
+
 type AirshowSubscriptionPayload {
   mutation: MutationType!
   node: Airshow
@@ -472,9 +568,21 @@ input AirshowUpdateDataInput {
   updatedAt: DateTime
   name: String
   date: String
+  createdBy: UserUpdateOneRequiredWithoutCreated_airshowsInput
+  updatedBy: UserUpdateManyWithoutEdited_airshowsInput
 }
 
 input AirshowUpdateInput {
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  name: String
+  date: String
+  createdBy: UserUpdateOneRequiredWithoutCreated_airshowsInput
+  updatedBy: UserUpdateManyWithoutEdited_airshowsInput
+}
+
+input AirshowUpdateManyDataInput {
   id: ID
   createdAt: DateTime
   updatedAt: DateTime
@@ -490,6 +598,35 @@ input AirshowUpdateManyMutationInput {
   date: String
 }
 
+input AirshowUpdateManyWithoutCreatedByInput {
+  create: [AirshowCreateWithoutCreatedByInput!]
+  delete: [AirshowWhereUniqueInput!]
+  connect: [AirshowWhereUniqueInput!]
+  set: [AirshowWhereUniqueInput!]
+  disconnect: [AirshowWhereUniqueInput!]
+  update: [AirshowUpdateWithWhereUniqueWithoutCreatedByInput!]
+  upsert: [AirshowUpsertWithWhereUniqueWithoutCreatedByInput!]
+  deleteMany: [AirshowScalarWhereInput!]
+  updateMany: [AirshowUpdateManyWithWhereNestedInput!]
+}
+
+input AirshowUpdateManyWithoutUpdatedByInput {
+  create: [AirshowCreateWithoutUpdatedByInput!]
+  delete: [AirshowWhereUniqueInput!]
+  connect: [AirshowWhereUniqueInput!]
+  set: [AirshowWhereUniqueInput!]
+  disconnect: [AirshowWhereUniqueInput!]
+  update: [AirshowUpdateWithWhereUniqueWithoutUpdatedByInput!]
+  upsert: [AirshowUpsertWithWhereUniqueWithoutUpdatedByInput!]
+  deleteMany: [AirshowScalarWhereInput!]
+  updateMany: [AirshowUpdateManyWithWhereNestedInput!]
+}
+
+input AirshowUpdateManyWithWhereNestedInput {
+  where: AirshowScalarWhereInput!
+  data: AirshowUpdateManyDataInput!
+}
+
 input AirshowUpdateOneRequiredInput {
   create: AirshowCreateInput
   update: AirshowUpdateDataInput
@@ -497,9 +634,49 @@ input AirshowUpdateOneRequiredInput {
   connect: AirshowWhereUniqueInput
 }
 
+input AirshowUpdateWithoutCreatedByDataInput {
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  name: String
+  date: String
+  updatedBy: UserUpdateManyWithoutEdited_airshowsInput
+}
+
+input AirshowUpdateWithoutUpdatedByDataInput {
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  name: String
+  date: String
+  createdBy: UserUpdateOneRequiredWithoutCreated_airshowsInput
+}
+
+input AirshowUpdateWithWhereUniqueWithoutCreatedByInput {
+  where: AirshowWhereUniqueInput!
+  data: AirshowUpdateWithoutCreatedByDataInput!
+}
+
+input AirshowUpdateWithWhereUniqueWithoutUpdatedByInput {
+  where: AirshowWhereUniqueInput!
+  data: AirshowUpdateWithoutUpdatedByDataInput!
+}
+
 input AirshowUpsertNestedInput {
   update: AirshowUpdateDataInput!
   create: AirshowCreateInput!
+}
+
+input AirshowUpsertWithWhereUniqueWithoutCreatedByInput {
+  where: AirshowWhereUniqueInput!
+  update: AirshowUpdateWithoutCreatedByDataInput!
+  create: AirshowCreateWithoutCreatedByInput!
+}
+
+input AirshowUpsertWithWhereUniqueWithoutUpdatedByInput {
+  where: AirshowWhereUniqueInput!
+  update: AirshowUpdateWithoutUpdatedByDataInput!
+  create: AirshowCreateWithoutUpdatedByInput!
 }
 
 input AirshowWhereInput {
@@ -561,6 +738,8 @@ input AirshowWhereInput {
   date_not_starts_with: String
   date_ends_with: String
   date_not_ends_with: String
+  createdBy: UserWhereInput
+  updatedBy_some: UserWhereInput
   AND: [AirshowWhereInput!]
 }
 
@@ -642,6 +821,8 @@ type ParkingLot {
   estimated_travel_distance: Int
   estimated_travel_time: Int
   zone: Zone!
+  createdBy: User!
+  updatedBy(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
 }
 
 type ParkingLotConnection {
@@ -660,11 +841,49 @@ input ParkingLotCreateInput {
   estimated_travel_distance: Int
   estimated_travel_time: Int
   zone: ZoneCreateOneInput!
+  createdBy: UserCreateOneWithoutCreated_parking_lotsInput!
+  updatedBy: UserCreateManyWithoutEdited_parking_lotsInput
+}
+
+input ParkingLotCreateManyWithoutCreatedByInput {
+  create: [ParkingLotCreateWithoutCreatedByInput!]
+  connect: [ParkingLotWhereUniqueInput!]
+}
+
+input ParkingLotCreateManyWithoutUpdatedByInput {
+  create: [ParkingLotCreateWithoutUpdatedByInput!]
+  connect: [ParkingLotWhereUniqueInput!]
 }
 
 input ParkingLotCreateOneInput {
   create: ParkingLotCreateInput
   connect: ParkingLotWhereUniqueInput
+}
+
+input ParkingLotCreateWithoutCreatedByInput {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  address: AddressCreateManyInput
+  vehicle_capacity: Int!
+  estimated_travel_distance: Int
+  estimated_travel_time: Int
+  zone: ZoneCreateOneInput!
+  updatedBy: UserCreateManyWithoutEdited_parking_lotsInput
+}
+
+input ParkingLotCreateWithoutUpdatedByInput {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  address: AddressCreateManyInput
+  vehicle_capacity: Int!
+  estimated_travel_distance: Int
+  estimated_travel_time: Int
+  zone: ZoneCreateOneInput!
+  createdBy: UserCreateOneWithoutCreated_parking_lotsInput!
 }
 
 type ParkingLotEdge {
@@ -699,6 +918,80 @@ type ParkingLotPreviousValues {
   estimated_travel_time: Int
 }
 
+input ParkingLotScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  vehicle_capacity: Int
+  vehicle_capacity_not: Int
+  vehicle_capacity_in: [Int!]
+  vehicle_capacity_not_in: [Int!]
+  vehicle_capacity_lt: Int
+  vehicle_capacity_lte: Int
+  vehicle_capacity_gt: Int
+  vehicle_capacity_gte: Int
+  estimated_travel_distance: Int
+  estimated_travel_distance_not: Int
+  estimated_travel_distance_in: [Int!]
+  estimated_travel_distance_not_in: [Int!]
+  estimated_travel_distance_lt: Int
+  estimated_travel_distance_lte: Int
+  estimated_travel_distance_gt: Int
+  estimated_travel_distance_gte: Int
+  estimated_travel_time: Int
+  estimated_travel_time_not: Int
+  estimated_travel_time_in: [Int!]
+  estimated_travel_time_not_in: [Int!]
+  estimated_travel_time_lt: Int
+  estimated_travel_time_lte: Int
+  estimated_travel_time_gt: Int
+  estimated_travel_time_gte: Int
+  AND: [ParkingLotScalarWhereInput!]
+  OR: [ParkingLotScalarWhereInput!]
+  NOT: [ParkingLotScalarWhereInput!]
+}
+
 type ParkingLotSubscriptionPayload {
   mutation: MutationType!
   node: ParkingLot
@@ -725,6 +1018,8 @@ input ParkingLotUpdateDataInput {
   estimated_travel_distance: Int
   estimated_travel_time: Int
   zone: ZoneUpdateOneRequiredInput
+  createdBy: UserUpdateOneRequiredWithoutCreated_parking_lotsInput
+  updatedBy: UserUpdateManyWithoutEdited_parking_lotsInput
 }
 
 input ParkingLotUpdateInput {
@@ -737,6 +1032,18 @@ input ParkingLotUpdateInput {
   estimated_travel_distance: Int
   estimated_travel_time: Int
   zone: ZoneUpdateOneRequiredInput
+  createdBy: UserUpdateOneRequiredWithoutCreated_parking_lotsInput
+  updatedBy: UserUpdateManyWithoutEdited_parking_lotsInput
+}
+
+input ParkingLotUpdateManyDataInput {
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  name: String
+  vehicle_capacity: Int
+  estimated_travel_distance: Int
+  estimated_travel_time: Int
 }
 
 input ParkingLotUpdateManyMutationInput {
@@ -749,6 +1056,35 @@ input ParkingLotUpdateManyMutationInput {
   estimated_travel_time: Int
 }
 
+input ParkingLotUpdateManyWithoutCreatedByInput {
+  create: [ParkingLotCreateWithoutCreatedByInput!]
+  delete: [ParkingLotWhereUniqueInput!]
+  connect: [ParkingLotWhereUniqueInput!]
+  set: [ParkingLotWhereUniqueInput!]
+  disconnect: [ParkingLotWhereUniqueInput!]
+  update: [ParkingLotUpdateWithWhereUniqueWithoutCreatedByInput!]
+  upsert: [ParkingLotUpsertWithWhereUniqueWithoutCreatedByInput!]
+  deleteMany: [ParkingLotScalarWhereInput!]
+  updateMany: [ParkingLotUpdateManyWithWhereNestedInput!]
+}
+
+input ParkingLotUpdateManyWithoutUpdatedByInput {
+  create: [ParkingLotCreateWithoutUpdatedByInput!]
+  delete: [ParkingLotWhereUniqueInput!]
+  connect: [ParkingLotWhereUniqueInput!]
+  set: [ParkingLotWhereUniqueInput!]
+  disconnect: [ParkingLotWhereUniqueInput!]
+  update: [ParkingLotUpdateWithWhereUniqueWithoutUpdatedByInput!]
+  upsert: [ParkingLotUpsertWithWhereUniqueWithoutUpdatedByInput!]
+  deleteMany: [ParkingLotScalarWhereInput!]
+  updateMany: [ParkingLotUpdateManyWithWhereNestedInput!]
+}
+
+input ParkingLotUpdateManyWithWhereNestedInput {
+  where: ParkingLotScalarWhereInput!
+  data: ParkingLotUpdateManyDataInput!
+}
+
 input ParkingLotUpdateOneInput {
   create: ParkingLotCreateInput
   update: ParkingLotUpdateDataInput
@@ -758,9 +1094,57 @@ input ParkingLotUpdateOneInput {
   connect: ParkingLotWhereUniqueInput
 }
 
+input ParkingLotUpdateWithoutCreatedByDataInput {
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  name: String
+  address: AddressUpdateManyInput
+  vehicle_capacity: Int
+  estimated_travel_distance: Int
+  estimated_travel_time: Int
+  zone: ZoneUpdateOneRequiredInput
+  updatedBy: UserUpdateManyWithoutEdited_parking_lotsInput
+}
+
+input ParkingLotUpdateWithoutUpdatedByDataInput {
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  name: String
+  address: AddressUpdateManyInput
+  vehicle_capacity: Int
+  estimated_travel_distance: Int
+  estimated_travel_time: Int
+  zone: ZoneUpdateOneRequiredInput
+  createdBy: UserUpdateOneRequiredWithoutCreated_parking_lotsInput
+}
+
+input ParkingLotUpdateWithWhereUniqueWithoutCreatedByInput {
+  where: ParkingLotWhereUniqueInput!
+  data: ParkingLotUpdateWithoutCreatedByDataInput!
+}
+
+input ParkingLotUpdateWithWhereUniqueWithoutUpdatedByInput {
+  where: ParkingLotWhereUniqueInput!
+  data: ParkingLotUpdateWithoutUpdatedByDataInput!
+}
+
 input ParkingLotUpsertNestedInput {
   update: ParkingLotUpdateDataInput!
   create: ParkingLotCreateInput!
+}
+
+input ParkingLotUpsertWithWhereUniqueWithoutCreatedByInput {
+  where: ParkingLotWhereUniqueInput!
+  update: ParkingLotUpdateWithoutCreatedByDataInput!
+  create: ParkingLotCreateWithoutCreatedByInput!
+}
+
+input ParkingLotUpsertWithWhereUniqueWithoutUpdatedByInput {
+  where: ParkingLotWhereUniqueInput!
+  update: ParkingLotUpdateWithoutUpdatedByDataInput!
+  create: ParkingLotCreateWithoutUpdatedByInput!
 }
 
 input ParkingLotWhereInput {
@@ -834,6 +1218,8 @@ input ParkingLotWhereInput {
   estimated_travel_time_gt: Int
   estimated_travel_time_gte: Int
   zone: ZoneWhereInput
+  createdBy: UserWhereInput
+  updatedBy_some: UserWhereInput
   AND: [ParkingLotWhereInput!]
 }
 
@@ -882,6 +1268,8 @@ type Tracking {
   vehicle_count: Int!
   bus_count: Int!
   passenger_count: Int!
+  createdBy: User!
+  updatedBy(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
 }
 
 type TrackingConnection {
@@ -900,6 +1288,44 @@ input TrackingCreateInput {
   vehicle_count: Int!
   bus_count: Int!
   passenger_count: Int!
+  createdBy: UserCreateOneWithoutCreated_trackingInput!
+  updatedBy: UserCreateManyWithoutEdited_trackingInput
+}
+
+input TrackingCreateManyWithoutCreatedByInput {
+  create: [TrackingCreateWithoutCreatedByInput!]
+  connect: [TrackingWhereUniqueInput!]
+}
+
+input TrackingCreateManyWithoutUpdatedByInput {
+  create: [TrackingCreateWithoutUpdatedByInput!]
+  connect: [TrackingWhereUniqueInput!]
+}
+
+input TrackingCreateWithoutCreatedByInput {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  airshow: AirshowCreateOneInput!
+  parking_lot: ParkingLotCreateOneInput
+  zone: ZoneCreateOneInput
+  vehicle_count: Int!
+  bus_count: Int!
+  passenger_count: Int!
+  updatedBy: UserCreateManyWithoutEdited_trackingInput
+}
+
+input TrackingCreateWithoutUpdatedByInput {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  airshow: AirshowCreateOneInput!
+  parking_lot: ParkingLotCreateOneInput
+  zone: ZoneCreateOneInput
+  vehicle_count: Int!
+  bus_count: Int!
+  passenger_count: Int!
+  createdBy: UserCreateOneWithoutCreated_trackingInput!
 }
 
 type TrackingEdge {
@@ -931,6 +1357,66 @@ type TrackingPreviousValues {
   passenger_count: Int!
 }
 
+input TrackingScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  vehicle_count: Int
+  vehicle_count_not: Int
+  vehicle_count_in: [Int!]
+  vehicle_count_not_in: [Int!]
+  vehicle_count_lt: Int
+  vehicle_count_lte: Int
+  vehicle_count_gt: Int
+  vehicle_count_gte: Int
+  bus_count: Int
+  bus_count_not: Int
+  bus_count_in: [Int!]
+  bus_count_not_in: [Int!]
+  bus_count_lt: Int
+  bus_count_lte: Int
+  bus_count_gt: Int
+  bus_count_gte: Int
+  passenger_count: Int
+  passenger_count_not: Int
+  passenger_count_in: [Int!]
+  passenger_count_not_in: [Int!]
+  passenger_count_lt: Int
+  passenger_count_lte: Int
+  passenger_count_gt: Int
+  passenger_count_gte: Int
+  AND: [TrackingScalarWhereInput!]
+  OR: [TrackingScalarWhereInput!]
+  NOT: [TrackingScalarWhereInput!]
+}
+
 type TrackingSubscriptionPayload {
   mutation: MutationType!
   node: Tracking
@@ -957,6 +1443,17 @@ input TrackingUpdateInput {
   vehicle_count: Int
   bus_count: Int
   passenger_count: Int
+  createdBy: UserUpdateOneRequiredWithoutCreated_trackingInput
+  updatedBy: UserUpdateManyWithoutEdited_trackingInput
+}
+
+input TrackingUpdateManyDataInput {
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  vehicle_count: Int
+  bus_count: Int
+  passenger_count: Int
 }
 
 input TrackingUpdateManyMutationInput {
@@ -966,6 +1463,83 @@ input TrackingUpdateManyMutationInput {
   vehicle_count: Int
   bus_count: Int
   passenger_count: Int
+}
+
+input TrackingUpdateManyWithoutCreatedByInput {
+  create: [TrackingCreateWithoutCreatedByInput!]
+  delete: [TrackingWhereUniqueInput!]
+  connect: [TrackingWhereUniqueInput!]
+  set: [TrackingWhereUniqueInput!]
+  disconnect: [TrackingWhereUniqueInput!]
+  update: [TrackingUpdateWithWhereUniqueWithoutCreatedByInput!]
+  upsert: [TrackingUpsertWithWhereUniqueWithoutCreatedByInput!]
+  deleteMany: [TrackingScalarWhereInput!]
+  updateMany: [TrackingUpdateManyWithWhereNestedInput!]
+}
+
+input TrackingUpdateManyWithoutUpdatedByInput {
+  create: [TrackingCreateWithoutUpdatedByInput!]
+  delete: [TrackingWhereUniqueInput!]
+  connect: [TrackingWhereUniqueInput!]
+  set: [TrackingWhereUniqueInput!]
+  disconnect: [TrackingWhereUniqueInput!]
+  update: [TrackingUpdateWithWhereUniqueWithoutUpdatedByInput!]
+  upsert: [TrackingUpsertWithWhereUniqueWithoutUpdatedByInput!]
+  deleteMany: [TrackingScalarWhereInput!]
+  updateMany: [TrackingUpdateManyWithWhereNestedInput!]
+}
+
+input TrackingUpdateManyWithWhereNestedInput {
+  where: TrackingScalarWhereInput!
+  data: TrackingUpdateManyDataInput!
+}
+
+input TrackingUpdateWithoutCreatedByDataInput {
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  airshow: AirshowUpdateOneRequiredInput
+  parking_lot: ParkingLotUpdateOneInput
+  zone: ZoneUpdateOneInput
+  vehicle_count: Int
+  bus_count: Int
+  passenger_count: Int
+  updatedBy: UserUpdateManyWithoutEdited_trackingInput
+}
+
+input TrackingUpdateWithoutUpdatedByDataInput {
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  airshow: AirshowUpdateOneRequiredInput
+  parking_lot: ParkingLotUpdateOneInput
+  zone: ZoneUpdateOneInput
+  vehicle_count: Int
+  bus_count: Int
+  passenger_count: Int
+  createdBy: UserUpdateOneRequiredWithoutCreated_trackingInput
+}
+
+input TrackingUpdateWithWhereUniqueWithoutCreatedByInput {
+  where: TrackingWhereUniqueInput!
+  data: TrackingUpdateWithoutCreatedByDataInput!
+}
+
+input TrackingUpdateWithWhereUniqueWithoutUpdatedByInput {
+  where: TrackingWhereUniqueInput!
+  data: TrackingUpdateWithoutUpdatedByDataInput!
+}
+
+input TrackingUpsertWithWhereUniqueWithoutCreatedByInput {
+  where: TrackingWhereUniqueInput!
+  update: TrackingUpdateWithoutCreatedByDataInput!
+  create: TrackingCreateWithoutCreatedByInput!
+}
+
+input TrackingUpsertWithWhereUniqueWithoutUpdatedByInput {
+  where: TrackingWhereUniqueInput!
+  update: TrackingUpdateWithoutUpdatedByDataInput!
+  create: TrackingCreateWithoutUpdatedByInput!
 }
 
 input TrackingWhereInput {
@@ -1026,6 +1600,8 @@ input TrackingWhereInput {
   passenger_count_lte: Int
   passenger_count_gt: Int
   passenger_count_gte: Int
+  createdBy: UserWhereInput
+  updatedBy_some: UserWhereInput
   AND: [TrackingWhereInput!]
 }
 
@@ -1038,6 +1614,14 @@ type User {
   name: String!
   email: String!
   password: String!
+  created_airshows(where: AirshowWhereInput, orderBy: AirshowOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Airshow!]
+  created_parking_lots(where: ParkingLotWhereInput, orderBy: ParkingLotOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ParkingLot!]
+  created_zones(where: ZoneWhereInput, orderBy: ZoneOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zone!]
+  created_tracking(where: TrackingWhereInput, orderBy: TrackingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Tracking!]
+  edited_airshows(where: AirshowWhereInput, orderBy: AirshowOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Airshow!]
+  edited_parking_lots(where: ParkingLotWhereInput, orderBy: ParkingLotOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ParkingLot!]
+  edited_zones(where: ZoneWhereInput, orderBy: ZoneOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zone!]
+  edited_tracking(where: TrackingWhereInput, orderBy: TrackingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Tracking!]
 }
 
 type UserConnection {
@@ -1051,6 +1635,166 @@ input UserCreateInput {
   name: String!
   email: String!
   password: String!
+  created_airshows: AirshowCreateManyWithoutCreatedByInput
+  created_parking_lots: ParkingLotCreateManyWithoutCreatedByInput
+  created_zones: ZoneCreateManyWithoutCreatedByInput
+  created_tracking: TrackingCreateManyWithoutCreatedByInput
+  edited_airshows: AirshowCreateManyWithoutUpdatedByInput
+  edited_parking_lots: ParkingLotCreateManyWithoutUpdatedByInput
+  edited_zones: ZoneCreateManyWithoutUpdatedByInput
+  edited_tracking: TrackingCreateManyWithoutUpdatedByInput
+}
+
+input UserCreateManyWithoutEdited_airshowsInput {
+  create: [UserCreateWithoutEdited_airshowsInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateManyWithoutEdited_parking_lotsInput {
+  create: [UserCreateWithoutEdited_parking_lotsInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateManyWithoutEdited_trackingInput {
+  create: [UserCreateWithoutEdited_trackingInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateManyWithoutEdited_zonesInput {
+  create: [UserCreateWithoutEdited_zonesInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateOneWithoutCreated_airshowsInput {
+  create: UserCreateWithoutCreated_airshowsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutCreated_parking_lotsInput {
+  create: UserCreateWithoutCreated_parking_lotsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutCreated_trackingInput {
+  create: UserCreateWithoutCreated_trackingInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutCreated_zonesInput {
+  create: UserCreateWithoutCreated_zonesInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutCreated_airshowsInput {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+  created_parking_lots: ParkingLotCreateManyWithoutCreatedByInput
+  created_zones: ZoneCreateManyWithoutCreatedByInput
+  created_tracking: TrackingCreateManyWithoutCreatedByInput
+  edited_airshows: AirshowCreateManyWithoutUpdatedByInput
+  edited_parking_lots: ParkingLotCreateManyWithoutUpdatedByInput
+  edited_zones: ZoneCreateManyWithoutUpdatedByInput
+  edited_tracking: TrackingCreateManyWithoutUpdatedByInput
+}
+
+input UserCreateWithoutCreated_parking_lotsInput {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+  created_airshows: AirshowCreateManyWithoutCreatedByInput
+  created_zones: ZoneCreateManyWithoutCreatedByInput
+  created_tracking: TrackingCreateManyWithoutCreatedByInput
+  edited_airshows: AirshowCreateManyWithoutUpdatedByInput
+  edited_parking_lots: ParkingLotCreateManyWithoutUpdatedByInput
+  edited_zones: ZoneCreateManyWithoutUpdatedByInput
+  edited_tracking: TrackingCreateManyWithoutUpdatedByInput
+}
+
+input UserCreateWithoutCreated_trackingInput {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+  created_airshows: AirshowCreateManyWithoutCreatedByInput
+  created_parking_lots: ParkingLotCreateManyWithoutCreatedByInput
+  created_zones: ZoneCreateManyWithoutCreatedByInput
+  edited_airshows: AirshowCreateManyWithoutUpdatedByInput
+  edited_parking_lots: ParkingLotCreateManyWithoutUpdatedByInput
+  edited_zones: ZoneCreateManyWithoutUpdatedByInput
+  edited_tracking: TrackingCreateManyWithoutUpdatedByInput
+}
+
+input UserCreateWithoutCreated_zonesInput {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+  created_airshows: AirshowCreateManyWithoutCreatedByInput
+  created_parking_lots: ParkingLotCreateManyWithoutCreatedByInput
+  created_tracking: TrackingCreateManyWithoutCreatedByInput
+  edited_airshows: AirshowCreateManyWithoutUpdatedByInput
+  edited_parking_lots: ParkingLotCreateManyWithoutUpdatedByInput
+  edited_zones: ZoneCreateManyWithoutUpdatedByInput
+  edited_tracking: TrackingCreateManyWithoutUpdatedByInput
+}
+
+input UserCreateWithoutEdited_airshowsInput {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+  created_airshows: AirshowCreateManyWithoutCreatedByInput
+  created_parking_lots: ParkingLotCreateManyWithoutCreatedByInput
+  created_zones: ZoneCreateManyWithoutCreatedByInput
+  created_tracking: TrackingCreateManyWithoutCreatedByInput
+  edited_parking_lots: ParkingLotCreateManyWithoutUpdatedByInput
+  edited_zones: ZoneCreateManyWithoutUpdatedByInput
+  edited_tracking: TrackingCreateManyWithoutUpdatedByInput
+}
+
+input UserCreateWithoutEdited_parking_lotsInput {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+  created_airshows: AirshowCreateManyWithoutCreatedByInput
+  created_parking_lots: ParkingLotCreateManyWithoutCreatedByInput
+  created_zones: ZoneCreateManyWithoutCreatedByInput
+  created_tracking: TrackingCreateManyWithoutCreatedByInput
+  edited_airshows: AirshowCreateManyWithoutUpdatedByInput
+  edited_zones: ZoneCreateManyWithoutUpdatedByInput
+  edited_tracking: TrackingCreateManyWithoutUpdatedByInput
+}
+
+input UserCreateWithoutEdited_trackingInput {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+  created_airshows: AirshowCreateManyWithoutCreatedByInput
+  created_parking_lots: ParkingLotCreateManyWithoutCreatedByInput
+  created_zones: ZoneCreateManyWithoutCreatedByInput
+  created_tracking: TrackingCreateManyWithoutCreatedByInput
+  edited_airshows: AirshowCreateManyWithoutUpdatedByInput
+  edited_parking_lots: ParkingLotCreateManyWithoutUpdatedByInput
+  edited_zones: ZoneCreateManyWithoutUpdatedByInput
+}
+
+input UserCreateWithoutEdited_zonesInput {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+  created_airshows: AirshowCreateManyWithoutCreatedByInput
+  created_parking_lots: ParkingLotCreateManyWithoutCreatedByInput
+  created_zones: ZoneCreateManyWithoutCreatedByInput
+  created_tracking: TrackingCreateManyWithoutCreatedByInput
+  edited_airshows: AirshowCreateManyWithoutUpdatedByInput
+  edited_parking_lots: ParkingLotCreateManyWithoutUpdatedByInput
+  edited_tracking: TrackingCreateManyWithoutUpdatedByInput
 }
 
 type UserEdge {
@@ -1076,6 +1820,68 @@ type UserPreviousValues {
   password: String!
 }
 
+input UserScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
+  AND: [UserScalarWhereInput!]
+  OR: [UserScalarWhereInput!]
+  NOT: [UserScalarWhereInput!]
+}
+
 type UserSubscriptionPayload {
   mutation: MutationType!
   node: User
@@ -1097,6 +1903,21 @@ input UserUpdateInput {
   name: String
   email: String
   password: String
+  created_airshows: AirshowUpdateManyWithoutCreatedByInput
+  created_parking_lots: ParkingLotUpdateManyWithoutCreatedByInput
+  created_zones: ZoneUpdateManyWithoutCreatedByInput
+  created_tracking: TrackingUpdateManyWithoutCreatedByInput
+  edited_airshows: AirshowUpdateManyWithoutUpdatedByInput
+  edited_parking_lots: ParkingLotUpdateManyWithoutUpdatedByInput
+  edited_zones: ZoneUpdateManyWithoutUpdatedByInput
+  edited_tracking: TrackingUpdateManyWithoutUpdatedByInput
+}
+
+input UserUpdateManyDataInput {
+  id: ID
+  name: String
+  email: String
+  password: String
 }
 
 input UserUpdateManyMutationInput {
@@ -1104,6 +1925,263 @@ input UserUpdateManyMutationInput {
   name: String
   email: String
   password: String
+}
+
+input UserUpdateManyWithoutEdited_airshowsInput {
+  create: [UserCreateWithoutEdited_airshowsInput!]
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutEdited_airshowsInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutEdited_airshowsInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+}
+
+input UserUpdateManyWithoutEdited_parking_lotsInput {
+  create: [UserCreateWithoutEdited_parking_lotsInput!]
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutEdited_parking_lotsInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutEdited_parking_lotsInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+}
+
+input UserUpdateManyWithoutEdited_trackingInput {
+  create: [UserCreateWithoutEdited_trackingInput!]
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutEdited_trackingInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutEdited_trackingInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+}
+
+input UserUpdateManyWithoutEdited_zonesInput {
+  create: [UserCreateWithoutEdited_zonesInput!]
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutEdited_zonesInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutEdited_zonesInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+}
+
+input UserUpdateManyWithWhereNestedInput {
+  where: UserScalarWhereInput!
+  data: UserUpdateManyDataInput!
+}
+
+input UserUpdateOneRequiredWithoutCreated_airshowsInput {
+  create: UserCreateWithoutCreated_airshowsInput
+  update: UserUpdateWithoutCreated_airshowsDataInput
+  upsert: UserUpsertWithoutCreated_airshowsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateOneRequiredWithoutCreated_parking_lotsInput {
+  create: UserCreateWithoutCreated_parking_lotsInput
+  update: UserUpdateWithoutCreated_parking_lotsDataInput
+  upsert: UserUpsertWithoutCreated_parking_lotsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateOneRequiredWithoutCreated_trackingInput {
+  create: UserCreateWithoutCreated_trackingInput
+  update: UserUpdateWithoutCreated_trackingDataInput
+  upsert: UserUpsertWithoutCreated_trackingInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateOneRequiredWithoutCreated_zonesInput {
+  create: UserCreateWithoutCreated_zonesInput
+  update: UserUpdateWithoutCreated_zonesDataInput
+  upsert: UserUpsertWithoutCreated_zonesInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateWithoutCreated_airshowsDataInput {
+  id: ID
+  name: String
+  email: String
+  password: String
+  created_parking_lots: ParkingLotUpdateManyWithoutCreatedByInput
+  created_zones: ZoneUpdateManyWithoutCreatedByInput
+  created_tracking: TrackingUpdateManyWithoutCreatedByInput
+  edited_airshows: AirshowUpdateManyWithoutUpdatedByInput
+  edited_parking_lots: ParkingLotUpdateManyWithoutUpdatedByInput
+  edited_zones: ZoneUpdateManyWithoutUpdatedByInput
+  edited_tracking: TrackingUpdateManyWithoutUpdatedByInput
+}
+
+input UserUpdateWithoutCreated_parking_lotsDataInput {
+  id: ID
+  name: String
+  email: String
+  password: String
+  created_airshows: AirshowUpdateManyWithoutCreatedByInput
+  created_zones: ZoneUpdateManyWithoutCreatedByInput
+  created_tracking: TrackingUpdateManyWithoutCreatedByInput
+  edited_airshows: AirshowUpdateManyWithoutUpdatedByInput
+  edited_parking_lots: ParkingLotUpdateManyWithoutUpdatedByInput
+  edited_zones: ZoneUpdateManyWithoutUpdatedByInput
+  edited_tracking: TrackingUpdateManyWithoutUpdatedByInput
+}
+
+input UserUpdateWithoutCreated_trackingDataInput {
+  id: ID
+  name: String
+  email: String
+  password: String
+  created_airshows: AirshowUpdateManyWithoutCreatedByInput
+  created_parking_lots: ParkingLotUpdateManyWithoutCreatedByInput
+  created_zones: ZoneUpdateManyWithoutCreatedByInput
+  edited_airshows: AirshowUpdateManyWithoutUpdatedByInput
+  edited_parking_lots: ParkingLotUpdateManyWithoutUpdatedByInput
+  edited_zones: ZoneUpdateManyWithoutUpdatedByInput
+  edited_tracking: TrackingUpdateManyWithoutUpdatedByInput
+}
+
+input UserUpdateWithoutCreated_zonesDataInput {
+  id: ID
+  name: String
+  email: String
+  password: String
+  created_airshows: AirshowUpdateManyWithoutCreatedByInput
+  created_parking_lots: ParkingLotUpdateManyWithoutCreatedByInput
+  created_tracking: TrackingUpdateManyWithoutCreatedByInput
+  edited_airshows: AirshowUpdateManyWithoutUpdatedByInput
+  edited_parking_lots: ParkingLotUpdateManyWithoutUpdatedByInput
+  edited_zones: ZoneUpdateManyWithoutUpdatedByInput
+  edited_tracking: TrackingUpdateManyWithoutUpdatedByInput
+}
+
+input UserUpdateWithoutEdited_airshowsDataInput {
+  id: ID
+  name: String
+  email: String
+  password: String
+  created_airshows: AirshowUpdateManyWithoutCreatedByInput
+  created_parking_lots: ParkingLotUpdateManyWithoutCreatedByInput
+  created_zones: ZoneUpdateManyWithoutCreatedByInput
+  created_tracking: TrackingUpdateManyWithoutCreatedByInput
+  edited_parking_lots: ParkingLotUpdateManyWithoutUpdatedByInput
+  edited_zones: ZoneUpdateManyWithoutUpdatedByInput
+  edited_tracking: TrackingUpdateManyWithoutUpdatedByInput
+}
+
+input UserUpdateWithoutEdited_parking_lotsDataInput {
+  id: ID
+  name: String
+  email: String
+  password: String
+  created_airshows: AirshowUpdateManyWithoutCreatedByInput
+  created_parking_lots: ParkingLotUpdateManyWithoutCreatedByInput
+  created_zones: ZoneUpdateManyWithoutCreatedByInput
+  created_tracking: TrackingUpdateManyWithoutCreatedByInput
+  edited_airshows: AirshowUpdateManyWithoutUpdatedByInput
+  edited_zones: ZoneUpdateManyWithoutUpdatedByInput
+  edited_tracking: TrackingUpdateManyWithoutUpdatedByInput
+}
+
+input UserUpdateWithoutEdited_trackingDataInput {
+  id: ID
+  name: String
+  email: String
+  password: String
+  created_airshows: AirshowUpdateManyWithoutCreatedByInput
+  created_parking_lots: ParkingLotUpdateManyWithoutCreatedByInput
+  created_zones: ZoneUpdateManyWithoutCreatedByInput
+  created_tracking: TrackingUpdateManyWithoutCreatedByInput
+  edited_airshows: AirshowUpdateManyWithoutUpdatedByInput
+  edited_parking_lots: ParkingLotUpdateManyWithoutUpdatedByInput
+  edited_zones: ZoneUpdateManyWithoutUpdatedByInput
+}
+
+input UserUpdateWithoutEdited_zonesDataInput {
+  id: ID
+  name: String
+  email: String
+  password: String
+  created_airshows: AirshowUpdateManyWithoutCreatedByInput
+  created_parking_lots: ParkingLotUpdateManyWithoutCreatedByInput
+  created_zones: ZoneUpdateManyWithoutCreatedByInput
+  created_tracking: TrackingUpdateManyWithoutCreatedByInput
+  edited_airshows: AirshowUpdateManyWithoutUpdatedByInput
+  edited_parking_lots: ParkingLotUpdateManyWithoutUpdatedByInput
+  edited_tracking: TrackingUpdateManyWithoutUpdatedByInput
+}
+
+input UserUpdateWithWhereUniqueWithoutEdited_airshowsInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutEdited_airshowsDataInput!
+}
+
+input UserUpdateWithWhereUniqueWithoutEdited_parking_lotsInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutEdited_parking_lotsDataInput!
+}
+
+input UserUpdateWithWhereUniqueWithoutEdited_trackingInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutEdited_trackingDataInput!
+}
+
+input UserUpdateWithWhereUniqueWithoutEdited_zonesInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutEdited_zonesDataInput!
+}
+
+input UserUpsertWithoutCreated_airshowsInput {
+  update: UserUpdateWithoutCreated_airshowsDataInput!
+  create: UserCreateWithoutCreated_airshowsInput!
+}
+
+input UserUpsertWithoutCreated_parking_lotsInput {
+  update: UserUpdateWithoutCreated_parking_lotsDataInput!
+  create: UserCreateWithoutCreated_parking_lotsInput!
+}
+
+input UserUpsertWithoutCreated_trackingInput {
+  update: UserUpdateWithoutCreated_trackingDataInput!
+  create: UserCreateWithoutCreated_trackingInput!
+}
+
+input UserUpsertWithoutCreated_zonesInput {
+  update: UserUpdateWithoutCreated_zonesDataInput!
+  create: UserCreateWithoutCreated_zonesInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutEdited_airshowsInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutEdited_airshowsDataInput!
+  create: UserCreateWithoutEdited_airshowsInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutEdited_parking_lotsInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutEdited_parking_lotsDataInput!
+  create: UserCreateWithoutEdited_parking_lotsInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutEdited_trackingInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutEdited_trackingDataInput!
+  create: UserCreateWithoutEdited_trackingInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutEdited_zonesInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutEdited_zonesDataInput!
+  create: UserCreateWithoutEdited_zonesInput!
 }
 
 input UserWhereInput {
@@ -1163,6 +2241,14 @@ input UserWhereInput {
   password_not_starts_with: String
   password_ends_with: String
   password_not_ends_with: String
+  created_airshows_some: AirshowWhereInput
+  created_parking_lots_some: ParkingLotWhereInput
+  created_zones_some: ZoneWhereInput
+  created_tracking_some: TrackingWhereInput
+  edited_airshows_some: AirshowWhereInput
+  edited_parking_lots_some: ParkingLotWhereInput
+  edited_zones_some: ZoneWhereInput
+  edited_tracking_some: TrackingWhereInput
   AND: [UserWhereInput!]
 }
 
@@ -1177,6 +2263,8 @@ type Zone {
   updatedAt: DateTime!
   name: String!
   lot_count: Int!
+  createdBy: User!
+  updatedBy(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
 }
 
 type ZoneConnection {
@@ -1191,11 +2279,41 @@ input ZoneCreateInput {
   updatedAt: DateTime!
   name: String!
   lot_count: Int!
+  createdBy: UserCreateOneWithoutCreated_zonesInput!
+  updatedBy: UserCreateManyWithoutEdited_zonesInput
+}
+
+input ZoneCreateManyWithoutCreatedByInput {
+  create: [ZoneCreateWithoutCreatedByInput!]
+  connect: [ZoneWhereUniqueInput!]
+}
+
+input ZoneCreateManyWithoutUpdatedByInput {
+  create: [ZoneCreateWithoutUpdatedByInput!]
+  connect: [ZoneWhereUniqueInput!]
 }
 
 input ZoneCreateOneInput {
   create: ZoneCreateInput
   connect: ZoneWhereUniqueInput
+}
+
+input ZoneCreateWithoutCreatedByInput {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  lot_count: Int!
+  updatedBy: UserCreateManyWithoutEdited_zonesInput
+}
+
+input ZoneCreateWithoutUpdatedByInput {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  lot_count: Int!
+  createdBy: UserCreateOneWithoutCreated_zonesInput!
 }
 
 type ZoneEdge {
@@ -1224,6 +2342,64 @@ type ZonePreviousValues {
   lot_count: Int!
 }
 
+input ZoneScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  lot_count: Int
+  lot_count_not: Int
+  lot_count_in: [Int!]
+  lot_count_not_in: [Int!]
+  lot_count_lt: Int
+  lot_count_lte: Int
+  lot_count_gt: Int
+  lot_count_gte: Int
+  AND: [ZoneScalarWhereInput!]
+  OR: [ZoneScalarWhereInput!]
+  NOT: [ZoneScalarWhereInput!]
+}
+
 type ZoneSubscriptionPayload {
   mutation: MutationType!
   node: Zone
@@ -1246,9 +2422,21 @@ input ZoneUpdateDataInput {
   updatedAt: DateTime
   name: String
   lot_count: Int
+  createdBy: UserUpdateOneRequiredWithoutCreated_zonesInput
+  updatedBy: UserUpdateManyWithoutEdited_zonesInput
 }
 
 input ZoneUpdateInput {
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  name: String
+  lot_count: Int
+  createdBy: UserUpdateOneRequiredWithoutCreated_zonesInput
+  updatedBy: UserUpdateManyWithoutEdited_zonesInput
+}
+
+input ZoneUpdateManyDataInput {
   id: ID
   createdAt: DateTime
   updatedAt: DateTime
@@ -1262,6 +2450,35 @@ input ZoneUpdateManyMutationInput {
   updatedAt: DateTime
   name: String
   lot_count: Int
+}
+
+input ZoneUpdateManyWithoutCreatedByInput {
+  create: [ZoneCreateWithoutCreatedByInput!]
+  delete: [ZoneWhereUniqueInput!]
+  connect: [ZoneWhereUniqueInput!]
+  set: [ZoneWhereUniqueInput!]
+  disconnect: [ZoneWhereUniqueInput!]
+  update: [ZoneUpdateWithWhereUniqueWithoutCreatedByInput!]
+  upsert: [ZoneUpsertWithWhereUniqueWithoutCreatedByInput!]
+  deleteMany: [ZoneScalarWhereInput!]
+  updateMany: [ZoneUpdateManyWithWhereNestedInput!]
+}
+
+input ZoneUpdateManyWithoutUpdatedByInput {
+  create: [ZoneCreateWithoutUpdatedByInput!]
+  delete: [ZoneWhereUniqueInput!]
+  connect: [ZoneWhereUniqueInput!]
+  set: [ZoneWhereUniqueInput!]
+  disconnect: [ZoneWhereUniqueInput!]
+  update: [ZoneUpdateWithWhereUniqueWithoutUpdatedByInput!]
+  upsert: [ZoneUpsertWithWhereUniqueWithoutUpdatedByInput!]
+  deleteMany: [ZoneScalarWhereInput!]
+  updateMany: [ZoneUpdateManyWithWhereNestedInput!]
+}
+
+input ZoneUpdateManyWithWhereNestedInput {
+  where: ZoneScalarWhereInput!
+  data: ZoneUpdateManyDataInput!
 }
 
 input ZoneUpdateOneInput {
@@ -1280,9 +2497,49 @@ input ZoneUpdateOneRequiredInput {
   connect: ZoneWhereUniqueInput
 }
 
+input ZoneUpdateWithoutCreatedByDataInput {
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  name: String
+  lot_count: Int
+  updatedBy: UserUpdateManyWithoutEdited_zonesInput
+}
+
+input ZoneUpdateWithoutUpdatedByDataInput {
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  name: String
+  lot_count: Int
+  createdBy: UserUpdateOneRequiredWithoutCreated_zonesInput
+}
+
+input ZoneUpdateWithWhereUniqueWithoutCreatedByInput {
+  where: ZoneWhereUniqueInput!
+  data: ZoneUpdateWithoutCreatedByDataInput!
+}
+
+input ZoneUpdateWithWhereUniqueWithoutUpdatedByInput {
+  where: ZoneWhereUniqueInput!
+  data: ZoneUpdateWithoutUpdatedByDataInput!
+}
+
 input ZoneUpsertNestedInput {
   update: ZoneUpdateDataInput!
   create: ZoneCreateInput!
+}
+
+input ZoneUpsertWithWhereUniqueWithoutCreatedByInput {
+  where: ZoneWhereUniqueInput!
+  update: ZoneUpdateWithoutCreatedByDataInput!
+  create: ZoneCreateWithoutCreatedByInput!
+}
+
+input ZoneUpsertWithWhereUniqueWithoutUpdatedByInput {
+  where: ZoneWhereUniqueInput!
+  update: ZoneUpdateWithoutUpdatedByDataInput!
+  create: ZoneCreateWithoutUpdatedByInput!
 }
 
 input ZoneWhereInput {
@@ -1338,6 +2595,8 @@ input ZoneWhereInput {
   lot_count_lte: Int
   lot_count_gt: Int
   lot_count_gte: Int
+  createdBy: UserWhereInput
+  updatedBy_some: UserWhereInput
   AND: [ZoneWhereInput!]
 }
 

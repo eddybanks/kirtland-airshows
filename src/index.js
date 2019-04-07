@@ -23,6 +23,7 @@ const resolvers = {
       return context.prisma.createAirshow({
         name: args.name,
         date: args.date,
+        createdBy: args.createBy,
       })
     },
   },

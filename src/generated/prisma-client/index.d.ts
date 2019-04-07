@@ -367,20 +367,6 @@ export type AddressOrderByInput =
   | "state_ASC"
   | "state_DESC";
 
-export type TrackingOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC"
-  | "vehicle_count_ASC"
-  | "vehicle_count_DESC"
-  | "bus_count_ASC"
-  | "bus_count_DESC"
-  | "passenger_count_ASC"
-  | "passenger_count_DESC";
-
 export type UserOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -403,108 +389,78 @@ export type ZoneOrderByInput =
   | "lot_count_ASC"
   | "lot_count_DESC";
 
+export type TrackingOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC"
+  | "vehicle_count_ASC"
+  | "vehicle_count_DESC"
+  | "bus_count_ASC"
+  | "bus_count_DESC"
+  | "passenger_count_ASC"
+  | "passenger_count_DESC";
+
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface AirshowCreateInput {
-  id: ID_Input;
-  createdAt: DateTimeInput;
-  updatedAt: DateTimeInput;
-  name: String;
-  date: String;
+export interface UserUpdateOneRequiredWithoutCreated_zonesInput {
+  create?: UserCreateWithoutCreated_zonesInput;
+  update?: UserUpdateWithoutCreated_zonesDataInput;
+  upsert?: UserUpsertWithoutCreated_zonesInput;
+  connect?: UserWhereUniqueInput;
 }
 
 export type AddressWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
 }>;
 
-export interface UserWhereInput {
+export interface UserCreateManyWithoutEdited_trackingInput {
+  create?:
+    | UserCreateWithoutEdited_trackingInput[]
+    | UserCreateWithoutEdited_trackingInput;
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+}
+
+export interface UserUpdateManyDataInput {
   id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
   name?: String;
-  name_not?: String;
-  name_in?: String[] | String;
-  name_not_in?: String[] | String;
-  name_lt?: String;
-  name_lte?: String;
-  name_gt?: String;
-  name_gte?: String;
-  name_contains?: String;
-  name_not_contains?: String;
-  name_starts_with?: String;
-  name_not_starts_with?: String;
-  name_ends_with?: String;
-  name_not_ends_with?: String;
   email?: String;
-  email_not?: String;
-  email_in?: String[] | String;
-  email_not_in?: String[] | String;
-  email_lt?: String;
-  email_lte?: String;
-  email_gt?: String;
-  email_gte?: String;
-  email_contains?: String;
-  email_not_contains?: String;
-  email_starts_with?: String;
-  email_not_starts_with?: String;
-  email_ends_with?: String;
-  email_not_ends_with?: String;
   password?: String;
-  password_not?: String;
-  password_in?: String[] | String;
-  password_not_in?: String[] | String;
-  password_lt?: String;
-  password_lte?: String;
-  password_gt?: String;
-  password_gte?: String;
-  password_contains?: String;
-  password_not_contains?: String;
-  password_starts_with?: String;
-  password_not_starts_with?: String;
-  password_ends_with?: String;
-  password_not_ends_with?: String;
-  AND?: UserWhereInput[] | UserWhereInput;
 }
 
-export interface AddressUpsertWithWhereUniqueNestedInput {
-  where: AddressWhereUniqueInput;
-  update: AddressUpdateDataInput;
-  create: AddressCreateInput;
+export interface UserCreateWithoutEdited_trackingInput {
+  id: ID_Input;
+  name: String;
+  email: String;
+  password: String;
+  created_airshows?: AirshowCreateManyWithoutCreatedByInput;
+  created_parking_lots?: ParkingLotCreateManyWithoutCreatedByInput;
+  created_zones?: ZoneCreateManyWithoutCreatedByInput;
+  created_tracking?: TrackingCreateManyWithoutCreatedByInput;
+  edited_airshows?: AirshowCreateManyWithoutUpdatedByInput;
+  edited_parking_lots?: ParkingLotCreateManyWithoutUpdatedByInput;
+  edited_zones?: ZoneCreateManyWithoutUpdatedByInput;
 }
 
-export interface AirshowUpdateOneRequiredInput {
-  create?: AirshowCreateInput;
-  update?: AirshowUpdateDataInput;
-  upsert?: AirshowUpsertNestedInput;
-  connect?: AirshowWhereUniqueInput;
-}
-
-export interface ZoneCreateOneInput {
-  create?: ZoneCreateInput;
-  connect?: ZoneWhereUniqueInput;
-}
-
-export interface TrackingUpdateInput {
+export interface AirshowUpdateWithoutCreatedByDataInput {
   id?: ID_Input;
   createdAt?: DateTimeInput;
   updatedAt?: DateTimeInput;
-  airshow?: AirshowUpdateOneRequiredInput;
-  parking_lot?: ParkingLotUpdateOneInput;
-  zone?: ZoneUpdateOneInput;
-  vehicle_count?: Int;
-  bus_count?: Int;
-  passenger_count?: Int;
+  name?: String;
+  date?: String;
+  updatedBy?: UserUpdateManyWithoutEdited_airshowsInput;
+}
+
+export interface AirshowUpdateInput {
+  id?: ID_Input;
+  createdAt?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  name?: String;
+  date?: String;
+  createdBy?: UserUpdateOneRequiredWithoutCreated_airshowsInput;
+  updatedBy?: UserUpdateManyWithoutEdited_airshowsInput;
 }
 
 export interface UserSubscriptionWhereInput {
@@ -516,9 +472,11 @@ export interface UserSubscriptionWhereInput {
   AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
 }
 
-export interface ParkingLotCreateOneInput {
-  create?: ParkingLotCreateInput;
-  connect?: ParkingLotWhereUniqueInput;
+export interface UserUpdateOneRequiredWithoutCreated_airshowsInput {
+  create?: UserCreateWithoutCreated_airshowsInput;
+  update?: UserUpdateWithoutCreated_airshowsDataInput;
+  upsert?: UserUpsertWithoutCreated_airshowsInput;
+  connect?: UserWhereUniqueInput;
 }
 
 export interface TrackingSubscriptionWhereInput {
@@ -530,332 +488,18 @@ export interface TrackingSubscriptionWhereInput {
   AND?: TrackingSubscriptionWhereInput[] | TrackingSubscriptionWhereInput;
 }
 
-export interface AirshowCreateOneInput {
-  create?: AirshowCreateInput;
-  connect?: AirshowWhereUniqueInput;
-}
-
-export interface ParkingLotSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: ParkingLotWhereInput;
-  AND?: ParkingLotSubscriptionWhereInput[] | ParkingLotSubscriptionWhereInput;
-}
-
-export type ZoneWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
-
-export interface AddressSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: AddressWhereInput;
-  AND?: AddressSubscriptionWhereInput[] | AddressSubscriptionWhereInput;
-}
-
-export interface TrackingCreateInput {
-  id: ID_Input;
-  createdAt: DateTimeInput;
-  updatedAt: DateTimeInput;
-  airshow: AirshowCreateOneInput;
-  parking_lot?: ParkingLotCreateOneInput;
-  zone?: ZoneCreateOneInput;
-  vehicle_count: Int;
-  bus_count: Int;
-  passenger_count: Int;
-}
-
-export type ParkingLotWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
-
-export interface ParkingLotUpdateManyMutationInput {
-  id?: ID_Input;
-  createdAt?: DateTimeInput;
-  updatedAt?: DateTimeInput;
-  name?: String;
-  vehicle_capacity?: Int;
-  estimated_travel_distance?: Int;
-  estimated_travel_time?: Int;
-}
-
-export interface UserUpdateManyMutationInput {
+export interface UserUpdateWithoutCreated_airshowsDataInput {
   id?: ID_Input;
   name?: String;
   email?: String;
   password?: String;
-}
-
-export interface ZoneUpsertNestedInput {
-  update: ZoneUpdateDataInput;
-  create: ZoneCreateInput;
-}
-
-export interface ZoneWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  createdAt?: DateTimeInput;
-  createdAt_not?: DateTimeInput;
-  createdAt_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_lt?: DateTimeInput;
-  createdAt_lte?: DateTimeInput;
-  createdAt_gt?: DateTimeInput;
-  createdAt_gte?: DateTimeInput;
-  updatedAt?: DateTimeInput;
-  updatedAt_not?: DateTimeInput;
-  updatedAt_in?: DateTimeInput[] | DateTimeInput;
-  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
-  updatedAt_lt?: DateTimeInput;
-  updatedAt_lte?: DateTimeInput;
-  updatedAt_gt?: DateTimeInput;
-  updatedAt_gte?: DateTimeInput;
-  name?: String;
-  name_not?: String;
-  name_in?: String[] | String;
-  name_not_in?: String[] | String;
-  name_lt?: String;
-  name_lte?: String;
-  name_gt?: String;
-  name_gte?: String;
-  name_contains?: String;
-  name_not_contains?: String;
-  name_starts_with?: String;
-  name_not_starts_with?: String;
-  name_ends_with?: String;
-  name_not_ends_with?: String;
-  lot_count?: Int;
-  lot_count_not?: Int;
-  lot_count_in?: Int[] | Int;
-  lot_count_not_in?: Int[] | Int;
-  lot_count_lt?: Int;
-  lot_count_lte?: Int;
-  lot_count_gt?: Int;
-  lot_count_gte?: Int;
-  AND?: ZoneWhereInput[] | ZoneWhereInput;
-}
-
-export interface ZoneUpdateDataInput {
-  id?: ID_Input;
-  createdAt?: DateTimeInput;
-  updatedAt?: DateTimeInput;
-  name?: String;
-  lot_count?: Int;
-}
-
-export interface UserCreateInput {
-  id: ID_Input;
-  name: String;
-  email: String;
-  password: String;
-}
-
-export interface ZoneUpdateOneInput {
-  create?: ZoneCreateInput;
-  update?: ZoneUpdateDataInput;
-  upsert?: ZoneUpsertNestedInput;
-  delete?: Boolean;
-  disconnect?: Boolean;
-  connect?: ZoneWhereUniqueInput;
-}
-
-export interface ParkingLotUpsertNestedInput {
-  update: ParkingLotUpdateDataInput;
-  create: ParkingLotCreateInput;
-}
-
-export interface AddressCreateInput {
-  id: ID_Input;
-  createdAt: DateTimeInput;
-  updatedAt: DateTimeInput;
-  address_line: String;
-  address_line_two?: String;
-  zipcode: String;
-  city: String;
-  state: String;
-}
-
-export interface AddressWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  createdAt?: DateTimeInput;
-  createdAt_not?: DateTimeInput;
-  createdAt_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_lt?: DateTimeInput;
-  createdAt_lte?: DateTimeInput;
-  createdAt_gt?: DateTimeInput;
-  createdAt_gte?: DateTimeInput;
-  updatedAt?: DateTimeInput;
-  updatedAt_not?: DateTimeInput;
-  updatedAt_in?: DateTimeInput[] | DateTimeInput;
-  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
-  updatedAt_lt?: DateTimeInput;
-  updatedAt_lte?: DateTimeInput;
-  updatedAt_gt?: DateTimeInput;
-  updatedAt_gte?: DateTimeInput;
-  address_line?: String;
-  address_line_not?: String;
-  address_line_in?: String[] | String;
-  address_line_not_in?: String[] | String;
-  address_line_lt?: String;
-  address_line_lte?: String;
-  address_line_gt?: String;
-  address_line_gte?: String;
-  address_line_contains?: String;
-  address_line_not_contains?: String;
-  address_line_starts_with?: String;
-  address_line_not_starts_with?: String;
-  address_line_ends_with?: String;
-  address_line_not_ends_with?: String;
-  address_line_two?: String;
-  address_line_two_not?: String;
-  address_line_two_in?: String[] | String;
-  address_line_two_not_in?: String[] | String;
-  address_line_two_lt?: String;
-  address_line_two_lte?: String;
-  address_line_two_gt?: String;
-  address_line_two_gte?: String;
-  address_line_two_contains?: String;
-  address_line_two_not_contains?: String;
-  address_line_two_starts_with?: String;
-  address_line_two_not_starts_with?: String;
-  address_line_two_ends_with?: String;
-  address_line_two_not_ends_with?: String;
-  zipcode?: String;
-  zipcode_not?: String;
-  zipcode_in?: String[] | String;
-  zipcode_not_in?: String[] | String;
-  zipcode_lt?: String;
-  zipcode_lte?: String;
-  zipcode_gt?: String;
-  zipcode_gte?: String;
-  zipcode_contains?: String;
-  zipcode_not_contains?: String;
-  zipcode_starts_with?: String;
-  zipcode_not_starts_with?: String;
-  zipcode_ends_with?: String;
-  zipcode_not_ends_with?: String;
-  city?: String;
-  city_not?: String;
-  city_in?: String[] | String;
-  city_not_in?: String[] | String;
-  city_lt?: String;
-  city_lte?: String;
-  city_gt?: String;
-  city_gte?: String;
-  city_contains?: String;
-  city_not_contains?: String;
-  city_starts_with?: String;
-  city_not_starts_with?: String;
-  city_ends_with?: String;
-  city_not_ends_with?: String;
-  state?: String;
-  state_not?: String;
-  state_in?: String[] | String;
-  state_not_in?: String[] | String;
-  state_lt?: String;
-  state_lte?: String;
-  state_gt?: String;
-  state_gte?: String;
-  state_contains?: String;
-  state_not_contains?: String;
-  state_starts_with?: String;
-  state_not_starts_with?: String;
-  state_ends_with?: String;
-  state_not_ends_with?: String;
-  AND?: AddressWhereInput[] | AddressWhereInput;
-}
-
-export interface AddressUpdateInput {
-  id?: ID_Input;
-  createdAt?: DateTimeInput;
-  updatedAt?: DateTimeInput;
-  address_line?: String;
-  address_line_two?: String;
-  zipcode?: String;
-  city?: String;
-  state?: String;
-}
-
-export interface ParkingLotUpdateOneInput {
-  create?: ParkingLotCreateInput;
-  update?: ParkingLotUpdateDataInput;
-  upsert?: ParkingLotUpsertNestedInput;
-  delete?: Boolean;
-  disconnect?: Boolean;
-  connect?: ParkingLotWhereUniqueInput;
-}
-
-export interface AddressUpdateManyMutationInput {
-  id?: ID_Input;
-  createdAt?: DateTimeInput;
-  updatedAt?: DateTimeInput;
-  address_line?: String;
-  address_line_two?: String;
-  zipcode?: String;
-  city?: String;
-  state?: String;
-}
-
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-  email?: String;
-}>;
-
-export interface ZoneUpdateOneRequiredInput {
-  create?: ZoneCreateInput;
-  update?: ZoneUpdateDataInput;
-  upsert?: ZoneUpsertNestedInput;
-  connect?: ZoneWhereUniqueInput;
-}
-
-export interface ZoneSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: ZoneWhereInput;
-  AND?: ZoneSubscriptionWhereInput[] | ZoneSubscriptionWhereInput;
-}
-
-export interface AddressUpdateManyDataInput {
-  id?: ID_Input;
-  createdAt?: DateTimeInput;
-  updatedAt?: DateTimeInput;
-  address_line?: String;
-  address_line_two?: String;
-  zipcode?: String;
-  city?: String;
-  state?: String;
+  created_parking_lots?: ParkingLotUpdateManyWithoutCreatedByInput;
+  created_zones?: ZoneUpdateManyWithoutCreatedByInput;
+  created_tracking?: TrackingUpdateManyWithoutCreatedByInput;
+  edited_airshows?: AirshowUpdateManyWithoutUpdatedByInput;
+  edited_parking_lots?: ParkingLotUpdateManyWithoutUpdatedByInput;
+  edited_zones?: ZoneUpdateManyWithoutUpdatedByInput;
+  edited_tracking?: TrackingUpdateManyWithoutUpdatedByInput;
 }
 
 export interface AirshowWhereInput {
@@ -917,28 +561,29 @@ export interface AirshowWhereInput {
   date_not_starts_with?: String;
   date_ends_with?: String;
   date_not_ends_with?: String;
+  createdBy?: UserWhereInput;
+  updatedBy_some?: UserWhereInput;
   AND?: AirshowWhereInput[] | AirshowWhereInput;
 }
 
-export interface AddressUpdateManyWithWhereNestedInput {
-  where: AddressScalarWhereInput;
-  data: AddressUpdateManyDataInput;
-}
-
-export interface ZoneUpdateManyMutationInput {
-  id?: ID_Input;
-  createdAt?: DateTimeInput;
-  updatedAt?: DateTimeInput;
-  name?: String;
-  lot_count?: Int;
-}
-
-export interface AirshowUpdateInput {
-  id?: ID_Input;
-  createdAt?: DateTimeInput;
-  updatedAt?: DateTimeInput;
-  name?: String;
-  date?: String;
+export interface ParkingLotUpdateManyWithoutCreatedByInput {
+  create?:
+    | ParkingLotCreateWithoutCreatedByInput[]
+    | ParkingLotCreateWithoutCreatedByInput;
+  delete?: ParkingLotWhereUniqueInput[] | ParkingLotWhereUniqueInput;
+  connect?: ParkingLotWhereUniqueInput[] | ParkingLotWhereUniqueInput;
+  set?: ParkingLotWhereUniqueInput[] | ParkingLotWhereUniqueInput;
+  disconnect?: ParkingLotWhereUniqueInput[] | ParkingLotWhereUniqueInput;
+  update?:
+    | ParkingLotUpdateWithWhereUniqueWithoutCreatedByInput[]
+    | ParkingLotUpdateWithWhereUniqueWithoutCreatedByInput;
+  upsert?:
+    | ParkingLotUpsertWithWhereUniqueWithoutCreatedByInput[]
+    | ParkingLotUpsertWithWhereUniqueWithoutCreatedByInput;
+  deleteMany?: ParkingLotScalarWhereInput[] | ParkingLotScalarWhereInput;
+  updateMany?:
+    | ParkingLotUpdateManyWithWhereNestedInput[]
+    | ParkingLotUpdateManyWithWhereNestedInput;
 }
 
 export interface ParkingLotWhereInput {
@@ -1012,36 +657,14 @@ export interface ParkingLotWhereInput {
   estimated_travel_time_gt?: Int;
   estimated_travel_time_gte?: Int;
   zone?: ZoneWhereInput;
+  createdBy?: UserWhereInput;
+  updatedBy_some?: UserWhereInput;
   AND?: ParkingLotWhereInput[] | ParkingLotWhereInput;
 }
 
-export interface AirshowUpdateManyMutationInput {
-  id?: ID_Input;
-  createdAt?: DateTimeInput;
-  updatedAt?: DateTimeInput;
-  name?: String;
-  date?: String;
-}
-
-export interface TrackingUpdateManyMutationInput {
-  id?: ID_Input;
-  createdAt?: DateTimeInput;
-  updatedAt?: DateTimeInput;
-  vehicle_count?: Int;
-  bus_count?: Int;
-  passenger_count?: Int;
-}
-
-export interface ParkingLotCreateInput {
-  id: ID_Input;
-  createdAt: DateTimeInput;
-  updatedAt: DateTimeInput;
-  name: String;
-  address?: AddressCreateManyInput;
-  vehicle_capacity: Int;
-  estimated_travel_distance?: Int;
-  estimated_travel_time?: Int;
-  zone: ZoneCreateOneInput;
+export interface ParkingLotUpdateWithWhereUniqueWithoutCreatedByInput {
+  where: ParkingLotWhereUniqueInput;
+  data: ParkingLotUpdateWithoutCreatedByDataInput;
 }
 
 export interface TrackingWhereInput {
@@ -1102,17 +725,117 @@ export interface TrackingWhereInput {
   passenger_count_lte?: Int;
   passenger_count_gt?: Int;
   passenger_count_gte?: Int;
+  createdBy?: UserWhereInput;
+  updatedBy_some?: UserWhereInput;
   AND?: TrackingWhereInput[] | TrackingWhereInput;
 }
 
-export interface AddressCreateManyInput {
-  create?: AddressCreateInput[] | AddressCreateInput;
-  connect?: AddressWhereUniqueInput[] | AddressWhereUniqueInput;
+export interface ParkingLotUpdateWithoutCreatedByDataInput {
+  id?: ID_Input;
+  createdAt?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  name?: String;
+  address?: AddressUpdateManyInput;
+  vehicle_capacity?: Int;
+  estimated_travel_distance?: Int;
+  estimated_travel_time?: Int;
+  zone?: ZoneUpdateOneRequiredInput;
+  updatedBy?: UserUpdateManyWithoutEdited_parking_lotsInput;
 }
 
-export interface AirshowUpsertNestedInput {
-  update: AirshowUpdateDataInput;
-  create: AirshowCreateInput;
+export interface AddressSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: AddressWhereInput;
+  AND?: AddressSubscriptionWhereInput[] | AddressSubscriptionWhereInput;
+}
+
+export interface AddressUpdateManyInput {
+  create?: AddressCreateInput[] | AddressCreateInput;
+  update?:
+    | AddressUpdateWithWhereUniqueNestedInput[]
+    | AddressUpdateWithWhereUniqueNestedInput;
+  upsert?:
+    | AddressUpsertWithWhereUniqueNestedInput[]
+    | AddressUpsertWithWhereUniqueNestedInput;
+  delete?: AddressWhereUniqueInput[] | AddressWhereUniqueInput;
+  connect?: AddressWhereUniqueInput[] | AddressWhereUniqueInput;
+  set?: AddressWhereUniqueInput[] | AddressWhereUniqueInput;
+  disconnect?: AddressWhereUniqueInput[] | AddressWhereUniqueInput;
+  deleteMany?: AddressScalarWhereInput[] | AddressScalarWhereInput;
+  updateMany?:
+    | AddressUpdateManyWithWhereNestedInput[]
+    | AddressUpdateManyWithWhereNestedInput;
+}
+
+export interface ZoneUpdateInput {
+  id?: ID_Input;
+  createdAt?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  name?: String;
+  lot_count?: Int;
+  createdBy?: UserUpdateOneRequiredWithoutCreated_zonesInput;
+  updatedBy?: UserUpdateManyWithoutEdited_zonesInput;
+}
+
+export interface AddressUpdateWithWhereUniqueNestedInput {
+  where: AddressWhereUniqueInput;
+  data: AddressUpdateDataInput;
+}
+
+export interface UserUpdateManyMutationInput {
+  id?: ID_Input;
+  name?: String;
+  email?: String;
+  password?: String;
+}
+
+export interface AddressUpdateDataInput {
+  id?: ID_Input;
+  createdAt?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  address_line?: String;
+  address_line_two?: String;
+  zipcode?: String;
+  city?: String;
+  state?: String;
+}
+
+export interface UserCreateInput {
+  id: ID_Input;
+  name: String;
+  email: String;
+  password: String;
+  created_airshows?: AirshowCreateManyWithoutCreatedByInput;
+  created_parking_lots?: ParkingLotCreateManyWithoutCreatedByInput;
+  created_zones?: ZoneCreateManyWithoutCreatedByInput;
+  created_tracking?: TrackingCreateManyWithoutCreatedByInput;
+  edited_airshows?: AirshowCreateManyWithoutUpdatedByInput;
+  edited_parking_lots?: ParkingLotCreateManyWithoutUpdatedByInput;
+  edited_zones?: ZoneCreateManyWithoutUpdatedByInput;
+  edited_tracking?: TrackingCreateManyWithoutUpdatedByInput;
+}
+
+export interface AddressUpsertWithWhereUniqueNestedInput {
+  where: AddressWhereUniqueInput;
+  update: AddressUpdateDataInput;
+  create: AddressCreateInput;
+}
+
+export interface TrackingUpdateInput {
+  id?: ID_Input;
+  createdAt?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  airshow?: AirshowUpdateOneRequiredInput;
+  parking_lot?: ParkingLotUpdateOneInput;
+  zone?: ZoneUpdateOneInput;
+  vehicle_count?: Int;
+  bus_count?: Int;
+  passenger_count?: Int;
+  createdBy?: UserUpdateOneRequiredWithoutCreated_trackingInput;
+  updatedBy?: UserUpdateManyWithoutEdited_trackingInput;
 }
 
 export interface AddressScalarWhereInput {
@@ -1221,58 +944,13 @@ export interface AddressScalarWhereInput {
   NOT?: AddressScalarWhereInput[] | AddressScalarWhereInput;
 }
 
-export type AirshowWhereUniqueInput = AtLeastOne<{
+export type ParkingLotWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
 }>;
 
-export interface ZoneCreateInput {
-  id: ID_Input;
-  createdAt: DateTimeInput;
-  updatedAt: DateTimeInput;
-  name: String;
-  lot_count: Int;
-}
-
-export interface ZoneUpdateInput {
-  id?: ID_Input;
-  createdAt?: DateTimeInput;
-  updatedAt?: DateTimeInput;
-  name?: String;
-  lot_count?: Int;
-}
-
-export interface AddressUpdateDataInput {
-  id?: ID_Input;
-  createdAt?: DateTimeInput;
-  updatedAt?: DateTimeInput;
-  address_line?: String;
-  address_line_two?: String;
-  zipcode?: String;
-  city?: String;
-  state?: String;
-}
-
-export interface AddressUpdateWithWhereUniqueNestedInput {
-  where: AddressWhereUniqueInput;
-  data: AddressUpdateDataInput;
-}
-
-export interface AddressUpdateManyInput {
-  create?: AddressCreateInput[] | AddressCreateInput;
-  update?:
-    | AddressUpdateWithWhereUniqueNestedInput[]
-    | AddressUpdateWithWhereUniqueNestedInput;
-  upsert?:
-    | AddressUpsertWithWhereUniqueNestedInput[]
-    | AddressUpsertWithWhereUniqueNestedInput;
-  delete?: AddressWhereUniqueInput[] | AddressWhereUniqueInput;
-  connect?: AddressWhereUniqueInput[] | AddressWhereUniqueInput;
-  set?: AddressWhereUniqueInput[] | AddressWhereUniqueInput;
-  disconnect?: AddressWhereUniqueInput[] | AddressWhereUniqueInput;
-  deleteMany?: AddressScalarWhereInput[] | AddressScalarWhereInput;
-  updateMany?:
-    | AddressUpdateManyWithWhereNestedInput[]
-    | AddressUpdateManyWithWhereNestedInput;
+export interface AddressUpdateManyWithWhereNestedInput {
+  where: AddressScalarWhereInput;
+  data: AddressUpdateManyDataInput;
 }
 
 export interface ParkingLotUpdateInput {
@@ -1285,22 +963,424 @@ export interface ParkingLotUpdateInput {
   estimated_travel_distance?: Int;
   estimated_travel_time?: Int;
   zone?: ZoneUpdateOneRequiredInput;
+  createdBy?: UserUpdateOneRequiredWithoutCreated_parking_lotsInput;
+  updatedBy?: UserUpdateManyWithoutEdited_parking_lotsInput;
 }
 
-export interface UserUpdateInput {
+export interface AddressUpdateManyDataInput {
+  id?: ID_Input;
+  createdAt?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  address_line?: String;
+  address_line_two?: String;
+  zipcode?: String;
+  city?: String;
+  state?: String;
+}
+
+export type TrackingWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface ZoneUpdateOneRequiredInput {
+  create?: ZoneCreateInput;
+  update?: ZoneUpdateDataInput;
+  upsert?: ZoneUpsertNestedInput;
+  connect?: ZoneWhereUniqueInput;
+}
+
+export interface ParkingLotUpsertWithWhereUniqueWithoutCreatedByInput {
+  where: ParkingLotWhereUniqueInput;
+  update: ParkingLotUpdateWithoutCreatedByDataInput;
+  create: ParkingLotCreateWithoutCreatedByInput;
+}
+
+export interface ZoneUpdateDataInput {
+  id?: ID_Input;
+  createdAt?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  name?: String;
+  lot_count?: Int;
+  createdBy?: UserUpdateOneRequiredWithoutCreated_zonesInput;
+  updatedBy?: UserUpdateManyWithoutEdited_zonesInput;
+}
+
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+  email?: String;
+}>;
+
+export interface UserUpdateManyWithoutEdited_trackingInput {
+  create?:
+    | UserCreateWithoutEdited_trackingInput[]
+    | UserCreateWithoutEdited_trackingInput;
+  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  set?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  update?:
+    | UserUpdateWithWhereUniqueWithoutEdited_trackingInput[]
+    | UserUpdateWithWhereUniqueWithoutEdited_trackingInput;
+  upsert?:
+    | UserUpsertWithWhereUniqueWithoutEdited_trackingInput[]
+    | UserUpsertWithWhereUniqueWithoutEdited_trackingInput;
+  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput;
+  updateMany?:
+    | UserUpdateManyWithWhereNestedInput[]
+    | UserUpdateManyWithWhereNestedInput;
+}
+
+export interface UserUpsertWithWhereUniqueWithoutEdited_airshowsInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateWithoutEdited_airshowsDataInput;
+  create: UserCreateWithoutEdited_airshowsInput;
+}
+
+export interface UserUpdateWithoutCreated_zonesDataInput {
   id?: ID_Input;
   name?: String;
   email?: String;
   password?: String;
+  created_airshows?: AirshowUpdateManyWithoutCreatedByInput;
+  created_parking_lots?: ParkingLotUpdateManyWithoutCreatedByInput;
+  created_tracking?: TrackingUpdateManyWithoutCreatedByInput;
+  edited_airshows?: AirshowUpdateManyWithoutUpdatedByInput;
+  edited_parking_lots?: ParkingLotUpdateManyWithoutUpdatedByInput;
+  edited_zones?: ZoneUpdateManyWithoutUpdatedByInput;
+  edited_tracking?: TrackingUpdateManyWithoutUpdatedByInput;
 }
 
-export interface AirshowSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: AirshowWhereInput;
-  AND?: AirshowSubscriptionWhereInput[] | AirshowSubscriptionWhereInput;
+export type ZoneWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface AirshowUpdateManyWithoutCreatedByInput {
+  create?:
+    | AirshowCreateWithoutCreatedByInput[]
+    | AirshowCreateWithoutCreatedByInput;
+  delete?: AirshowWhereUniqueInput[] | AirshowWhereUniqueInput;
+  connect?: AirshowWhereUniqueInput[] | AirshowWhereUniqueInput;
+  set?: AirshowWhereUniqueInput[] | AirshowWhereUniqueInput;
+  disconnect?: AirshowWhereUniqueInput[] | AirshowWhereUniqueInput;
+  update?:
+    | AirshowUpdateWithWhereUniqueWithoutCreatedByInput[]
+    | AirshowUpdateWithWhereUniqueWithoutCreatedByInput;
+  upsert?:
+    | AirshowUpsertWithWhereUniqueWithoutCreatedByInput[]
+    | AirshowUpsertWithWhereUniqueWithoutCreatedByInput;
+  deleteMany?: AirshowScalarWhereInput[] | AirshowScalarWhereInput;
+  updateMany?:
+    | AirshowUpdateManyWithWhereNestedInput[]
+    | AirshowUpdateManyWithWhereNestedInput;
+}
+
+export interface TrackingUpsertWithWhereUniqueWithoutCreatedByInput {
+  where: TrackingWhereUniqueInput;
+  update: TrackingUpdateWithoutCreatedByDataInput;
+  create: TrackingCreateWithoutCreatedByInput;
+}
+
+export interface AirshowUpdateWithWhereUniqueWithoutCreatedByInput {
+  where: AirshowWhereUniqueInput;
+  data: AirshowUpdateWithoutCreatedByDataInput;
+}
+
+export interface AddressUpdateInput {
+  id?: ID_Input;
+  createdAt?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  address_line?: String;
+  address_line_two?: String;
+  zipcode?: String;
+  city?: String;
+  state?: String;
+}
+
+export interface ParkingLotUpsertNestedInput {
+  update: ParkingLotUpdateDataInput;
+  create: ParkingLotCreateInput;
+}
+
+export interface UserUpdateWithoutEdited_trackingDataInput {
+  id?: ID_Input;
+  name?: String;
+  email?: String;
+  password?: String;
+  created_airshows?: AirshowUpdateManyWithoutCreatedByInput;
+  created_parking_lots?: ParkingLotUpdateManyWithoutCreatedByInput;
+  created_zones?: ZoneUpdateManyWithoutCreatedByInput;
+  created_tracking?: TrackingUpdateManyWithoutCreatedByInput;
+  edited_airshows?: AirshowUpdateManyWithoutUpdatedByInput;
+  edited_parking_lots?: ParkingLotUpdateManyWithoutUpdatedByInput;
+  edited_zones?: ZoneUpdateManyWithoutUpdatedByInput;
+}
+
+export interface UserUpdateManyWithoutEdited_airshowsInput {
+  create?:
+    | UserCreateWithoutEdited_airshowsInput[]
+    | UserCreateWithoutEdited_airshowsInput;
+  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  set?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  update?:
+    | UserUpdateWithWhereUniqueWithoutEdited_airshowsInput[]
+    | UserUpdateWithWhereUniqueWithoutEdited_airshowsInput;
+  upsert?:
+    | UserUpsertWithWhereUniqueWithoutEdited_airshowsInput[]
+    | UserUpsertWithWhereUniqueWithoutEdited_airshowsInput;
+  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput;
+  updateMany?:
+    | UserUpdateManyWithWhereNestedInput[]
+    | UserUpdateManyWithWhereNestedInput;
+}
+
+export interface AirshowCreateInput {
+  id: ID_Input;
+  createdAt: DateTimeInput;
+  updatedAt: DateTimeInput;
+  name: String;
+  date: String;
+  createdBy: UserCreateOneWithoutCreated_airshowsInput;
+  updatedBy?: UserCreateManyWithoutEdited_airshowsInput;
+}
+
+export interface UserUpdateWithWhereUniqueWithoutEdited_airshowsInput {
+  where: UserWhereUniqueInput;
+  data: UserUpdateWithoutEdited_airshowsDataInput;
+}
+
+export interface UserCreateWithoutCreated_airshowsInput {
+  id: ID_Input;
+  name: String;
+  email: String;
+  password: String;
+  created_parking_lots?: ParkingLotCreateManyWithoutCreatedByInput;
+  created_zones?: ZoneCreateManyWithoutCreatedByInput;
+  created_tracking?: TrackingCreateManyWithoutCreatedByInput;
+  edited_airshows?: AirshowCreateManyWithoutUpdatedByInput;
+  edited_parking_lots?: ParkingLotCreateManyWithoutUpdatedByInput;
+  edited_zones?: ZoneCreateManyWithoutUpdatedByInput;
+  edited_tracking?: TrackingCreateManyWithoutUpdatedByInput;
+}
+
+export interface UserUpdateWithoutEdited_airshowsDataInput {
+  id?: ID_Input;
+  name?: String;
+  email?: String;
+  password?: String;
+  created_airshows?: AirshowUpdateManyWithoutCreatedByInput;
+  created_parking_lots?: ParkingLotUpdateManyWithoutCreatedByInput;
+  created_zones?: ZoneUpdateManyWithoutCreatedByInput;
+  created_tracking?: TrackingUpdateManyWithoutCreatedByInput;
+  edited_parking_lots?: ParkingLotUpdateManyWithoutUpdatedByInput;
+  edited_zones?: ZoneUpdateManyWithoutUpdatedByInput;
+  edited_tracking?: TrackingUpdateManyWithoutUpdatedByInput;
+}
+
+export interface ParkingLotCreateWithoutCreatedByInput {
+  id: ID_Input;
+  createdAt: DateTimeInput;
+  updatedAt: DateTimeInput;
+  name: String;
+  address?: AddressCreateManyInput;
+  vehicle_capacity: Int;
+  estimated_travel_distance?: Int;
+  estimated_travel_time?: Int;
+  zone: ZoneCreateOneInput;
+  updatedBy?: UserCreateManyWithoutEdited_parking_lotsInput;
+}
+
+export interface ZoneUpdateManyWithoutCreatedByInput {
+  create?: ZoneCreateWithoutCreatedByInput[] | ZoneCreateWithoutCreatedByInput;
+  delete?: ZoneWhereUniqueInput[] | ZoneWhereUniqueInput;
+  connect?: ZoneWhereUniqueInput[] | ZoneWhereUniqueInput;
+  set?: ZoneWhereUniqueInput[] | ZoneWhereUniqueInput;
+  disconnect?: ZoneWhereUniqueInput[] | ZoneWhereUniqueInput;
+  update?:
+    | ZoneUpdateWithWhereUniqueWithoutCreatedByInput[]
+    | ZoneUpdateWithWhereUniqueWithoutCreatedByInput;
+  upsert?:
+    | ZoneUpsertWithWhereUniqueWithoutCreatedByInput[]
+    | ZoneUpsertWithWhereUniqueWithoutCreatedByInput;
+  deleteMany?: ZoneScalarWhereInput[] | ZoneScalarWhereInput;
+  updateMany?:
+    | ZoneUpdateManyWithWhereNestedInput[]
+    | ZoneUpdateManyWithWhereNestedInput;
+}
+
+export interface ZoneCreateOneInput {
+  create?: ZoneCreateInput;
+  connect?: ZoneWhereUniqueInput;
+}
+
+export interface ZoneUpdateWithWhereUniqueWithoutCreatedByInput {
+  where: ZoneWhereUniqueInput;
+  data: ZoneUpdateWithoutCreatedByDataInput;
+}
+
+export interface UserCreateOneWithoutCreated_zonesInput {
+  create?: UserCreateWithoutCreated_zonesInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface ZoneUpdateWithoutCreatedByDataInput {
+  id?: ID_Input;
+  createdAt?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  name?: String;
+  lot_count?: Int;
+  updatedBy?: UserUpdateManyWithoutEdited_zonesInput;
+}
+
+export interface AirshowCreateManyWithoutCreatedByInput {
+  create?:
+    | AirshowCreateWithoutCreatedByInput[]
+    | AirshowCreateWithoutCreatedByInput;
+  connect?: AirshowWhereUniqueInput[] | AirshowWhereUniqueInput;
+}
+
+export interface UserUpdateManyWithoutEdited_zonesInput {
+  create?:
+    | UserCreateWithoutEdited_zonesInput[]
+    | UserCreateWithoutEdited_zonesInput;
+  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  set?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  update?:
+    | UserUpdateWithWhereUniqueWithoutEdited_zonesInput[]
+    | UserUpdateWithWhereUniqueWithoutEdited_zonesInput;
+  upsert?:
+    | UserUpsertWithWhereUniqueWithoutEdited_zonesInput[]
+    | UserUpsertWithWhereUniqueWithoutEdited_zonesInput;
+  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput;
+  updateMany?:
+    | UserUpdateManyWithWhereNestedInput[]
+    | UserUpdateManyWithWhereNestedInput;
+}
+
+export interface UserCreateManyWithoutEdited_airshowsInput {
+  create?:
+    | UserCreateWithoutEdited_airshowsInput[]
+    | UserCreateWithoutEdited_airshowsInput;
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+}
+
+export interface UserUpdateWithWhereUniqueWithoutEdited_zonesInput {
+  where: UserWhereUniqueInput;
+  data: UserUpdateWithoutEdited_zonesDataInput;
+}
+
+export interface ZoneCreateManyWithoutCreatedByInput {
+  create?: ZoneCreateWithoutCreatedByInput[] | ZoneCreateWithoutCreatedByInput;
+  connect?: ZoneWhereUniqueInput[] | ZoneWhereUniqueInput;
+}
+
+export interface UserUpdateWithoutEdited_zonesDataInput {
+  id?: ID_Input;
+  name?: String;
+  email?: String;
+  password?: String;
+  created_airshows?: AirshowUpdateManyWithoutCreatedByInput;
+  created_parking_lots?: ParkingLotUpdateManyWithoutCreatedByInput;
+  created_zones?: ZoneUpdateManyWithoutCreatedByInput;
+  created_tracking?: TrackingUpdateManyWithoutCreatedByInput;
+  edited_airshows?: AirshowUpdateManyWithoutUpdatedByInput;
+  edited_parking_lots?: ParkingLotUpdateManyWithoutUpdatedByInput;
+  edited_tracking?: TrackingUpdateManyWithoutUpdatedByInput;
+}
+
+export interface UserCreateManyWithoutEdited_zonesInput {
+  create?:
+    | UserCreateWithoutEdited_zonesInput[]
+    | UserCreateWithoutEdited_zonesInput;
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+}
+
+export interface TrackingUpdateManyWithoutCreatedByInput {
+  create?:
+    | TrackingCreateWithoutCreatedByInput[]
+    | TrackingCreateWithoutCreatedByInput;
+  delete?: TrackingWhereUniqueInput[] | TrackingWhereUniqueInput;
+  connect?: TrackingWhereUniqueInput[] | TrackingWhereUniqueInput;
+  set?: TrackingWhereUniqueInput[] | TrackingWhereUniqueInput;
+  disconnect?: TrackingWhereUniqueInput[] | TrackingWhereUniqueInput;
+  update?:
+    | TrackingUpdateWithWhereUniqueWithoutCreatedByInput[]
+    | TrackingUpdateWithWhereUniqueWithoutCreatedByInput;
+  upsert?:
+    | TrackingUpsertWithWhereUniqueWithoutCreatedByInput[]
+    | TrackingUpsertWithWhereUniqueWithoutCreatedByInput;
+  deleteMany?: TrackingScalarWhereInput[] | TrackingScalarWhereInput;
+  updateMany?:
+    | TrackingUpdateManyWithWhereNestedInput[]
+    | TrackingUpdateManyWithWhereNestedInput;
+}
+
+export interface TrackingCreateManyWithoutCreatedByInput {
+  create?:
+    | TrackingCreateWithoutCreatedByInput[]
+    | TrackingCreateWithoutCreatedByInput;
+  connect?: TrackingWhereUniqueInput[] | TrackingWhereUniqueInput;
+}
+
+export interface TrackingUpdateWithWhereUniqueWithoutCreatedByInput {
+  where: TrackingWhereUniqueInput;
+  data: TrackingUpdateWithoutCreatedByDataInput;
+}
+
+export interface AirshowCreateOneInput {
+  create?: AirshowCreateInput;
+  connect?: AirshowWhereUniqueInput;
+}
+
+export interface TrackingUpdateWithoutCreatedByDataInput {
+  id?: ID_Input;
+  createdAt?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  airshow?: AirshowUpdateOneRequiredInput;
+  parking_lot?: ParkingLotUpdateOneInput;
+  zone?: ZoneUpdateOneInput;
+  vehicle_count?: Int;
+  bus_count?: Int;
+  passenger_count?: Int;
+  updatedBy?: UserUpdateManyWithoutEdited_trackingInput;
+}
+
+export interface ParkingLotCreateInput {
+  id: ID_Input;
+  createdAt: DateTimeInput;
+  updatedAt: DateTimeInput;
+  name: String;
+  address?: AddressCreateManyInput;
+  vehicle_capacity: Int;
+  estimated_travel_distance?: Int;
+  estimated_travel_time?: Int;
+  zone: ZoneCreateOneInput;
+  createdBy: UserCreateOneWithoutCreated_parking_lotsInput;
+  updatedBy?: UserCreateManyWithoutEdited_parking_lotsInput;
+}
+
+export interface AirshowUpdateOneRequiredInput {
+  create?: AirshowCreateInput;
+  update?: AirshowUpdateDataInput;
+  upsert?: AirshowUpsertNestedInput;
+  connect?: AirshowWhereUniqueInput;
+}
+
+export interface UserCreateWithoutCreated_parking_lotsInput {
+  id: ID_Input;
+  name: String;
+  email: String;
+  password: String;
+  created_airshows?: AirshowCreateManyWithoutCreatedByInput;
+  created_zones?: ZoneCreateManyWithoutCreatedByInput;
+  created_tracking?: TrackingCreateManyWithoutCreatedByInput;
+  edited_airshows?: AirshowCreateManyWithoutUpdatedByInput;
+  edited_parking_lots?: ParkingLotCreateManyWithoutUpdatedByInput;
+  edited_zones?: ZoneCreateManyWithoutUpdatedByInput;
+  edited_tracking?: TrackingCreateManyWithoutUpdatedByInput;
 }
 
 export interface AirshowUpdateDataInput {
@@ -1309,6 +1389,53 @@ export interface AirshowUpdateDataInput {
   updatedAt?: DateTimeInput;
   name?: String;
   date?: String;
+  createdBy?: UserUpdateOneRequiredWithoutCreated_airshowsInput;
+  updatedBy?: UserUpdateManyWithoutEdited_airshowsInput;
+}
+
+export interface AirshowCreateWithoutUpdatedByInput {
+  id: ID_Input;
+  createdAt: DateTimeInput;
+  updatedAt: DateTimeInput;
+  name: String;
+  date: String;
+  createdBy: UserCreateOneWithoutCreated_airshowsInput;
+}
+
+export interface AirshowUpsertNestedInput {
+  update: AirshowUpdateDataInput;
+  create: AirshowCreateInput;
+}
+
+export interface ParkingLotCreateWithoutUpdatedByInput {
+  id: ID_Input;
+  createdAt: DateTimeInput;
+  updatedAt: DateTimeInput;
+  name: String;
+  address?: AddressCreateManyInput;
+  vehicle_capacity: Int;
+  estimated_travel_distance?: Int;
+  estimated_travel_time?: Int;
+  zone: ZoneCreateOneInput;
+  createdBy: UserCreateOneWithoutCreated_parking_lotsInput;
+}
+
+export interface ParkingLotUpdateOneInput {
+  create?: ParkingLotCreateInput;
+  update?: ParkingLotUpdateDataInput;
+  upsert?: ParkingLotUpsertNestedInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
+  connect?: ParkingLotWhereUniqueInput;
+}
+
+export interface ZoneCreateWithoutUpdatedByInput {
+  id: ID_Input;
+  createdAt: DateTimeInput;
+  updatedAt: DateTimeInput;
+  name: String;
+  lot_count: Int;
+  createdBy: UserCreateOneWithoutCreated_zonesInput;
 }
 
 export interface ParkingLotUpdateDataInput {
@@ -1321,11 +1448,1239 @@ export interface ParkingLotUpdateDataInput {
   estimated_travel_distance?: Int;
   estimated_travel_time?: Int;
   zone?: ZoneUpdateOneRequiredInput;
+  createdBy?: UserUpdateOneRequiredWithoutCreated_parking_lotsInput;
+  updatedBy?: UserUpdateManyWithoutEdited_parking_lotsInput;
 }
 
-export type TrackingWhereUniqueInput = AtLeastOne<{
+export interface TrackingCreateWithoutUpdatedByInput {
+  id: ID_Input;
+  createdAt: DateTimeInput;
+  updatedAt: DateTimeInput;
+  airshow: AirshowCreateOneInput;
+  parking_lot?: ParkingLotCreateOneInput;
+  zone?: ZoneCreateOneInput;
+  vehicle_count: Int;
+  bus_count: Int;
+  passenger_count: Int;
+  createdBy: UserCreateOneWithoutCreated_trackingInput;
+}
+
+export interface UserUpdateOneRequiredWithoutCreated_parking_lotsInput {
+  create?: UserCreateWithoutCreated_parking_lotsInput;
+  update?: UserUpdateWithoutCreated_parking_lotsDataInput;
+  upsert?: UserUpsertWithoutCreated_parking_lotsInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface UserCreateWithoutCreated_trackingInput {
+  id: ID_Input;
+  name: String;
+  email: String;
+  password: String;
+  created_airshows?: AirshowCreateManyWithoutCreatedByInput;
+  created_parking_lots?: ParkingLotCreateManyWithoutCreatedByInput;
+  created_zones?: ZoneCreateManyWithoutCreatedByInput;
+  edited_airshows?: AirshowCreateManyWithoutUpdatedByInput;
+  edited_parking_lots?: ParkingLotCreateManyWithoutUpdatedByInput;
+  edited_zones?: ZoneCreateManyWithoutUpdatedByInput;
+  edited_tracking?: TrackingCreateManyWithoutUpdatedByInput;
+}
+
+export interface UserUpdateWithoutCreated_parking_lotsDataInput {
+  id?: ID_Input;
+  name?: String;
+  email?: String;
+  password?: String;
+  created_airshows?: AirshowUpdateManyWithoutCreatedByInput;
+  created_zones?: ZoneUpdateManyWithoutCreatedByInput;
+  created_tracking?: TrackingUpdateManyWithoutCreatedByInput;
+  edited_airshows?: AirshowUpdateManyWithoutUpdatedByInput;
+  edited_parking_lots?: ParkingLotUpdateManyWithoutUpdatedByInput;
+  edited_zones?: ZoneUpdateManyWithoutUpdatedByInput;
+  edited_tracking?: TrackingUpdateManyWithoutUpdatedByInput;
+}
+
+export interface UserCreateWithoutEdited_parking_lotsInput {
+  id: ID_Input;
+  name: String;
+  email: String;
+  password: String;
+  created_airshows?: AirshowCreateManyWithoutCreatedByInput;
+  created_parking_lots?: ParkingLotCreateManyWithoutCreatedByInput;
+  created_zones?: ZoneCreateManyWithoutCreatedByInput;
+  created_tracking?: TrackingCreateManyWithoutCreatedByInput;
+  edited_airshows?: AirshowCreateManyWithoutUpdatedByInput;
+  edited_zones?: ZoneCreateManyWithoutUpdatedByInput;
+  edited_tracking?: TrackingCreateManyWithoutUpdatedByInput;
+}
+
+export interface AirshowUpdateManyWithoutUpdatedByInput {
+  create?:
+    | AirshowCreateWithoutUpdatedByInput[]
+    | AirshowCreateWithoutUpdatedByInput;
+  delete?: AirshowWhereUniqueInput[] | AirshowWhereUniqueInput;
+  connect?: AirshowWhereUniqueInput[] | AirshowWhereUniqueInput;
+  set?: AirshowWhereUniqueInput[] | AirshowWhereUniqueInput;
+  disconnect?: AirshowWhereUniqueInput[] | AirshowWhereUniqueInput;
+  update?:
+    | AirshowUpdateWithWhereUniqueWithoutUpdatedByInput[]
+    | AirshowUpdateWithWhereUniqueWithoutUpdatedByInput;
+  upsert?:
+    | AirshowUpsertWithWhereUniqueWithoutUpdatedByInput[]
+    | AirshowUpsertWithWhereUniqueWithoutUpdatedByInput;
+  deleteMany?: AirshowScalarWhereInput[] | AirshowScalarWhereInput;
+  updateMany?:
+    | AirshowUpdateManyWithWhereNestedInput[]
+    | AirshowUpdateManyWithWhereNestedInput;
+}
+
+export type AirshowWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
 }>;
+
+export interface AirshowUpdateWithWhereUniqueWithoutUpdatedByInput {
+  where: AirshowWhereUniqueInput;
+  data: AirshowUpdateWithoutUpdatedByDataInput;
+}
+
+export interface UserWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  email?: String;
+  email_not?: String;
+  email_in?: String[] | String;
+  email_not_in?: String[] | String;
+  email_lt?: String;
+  email_lte?: String;
+  email_gt?: String;
+  email_gte?: String;
+  email_contains?: String;
+  email_not_contains?: String;
+  email_starts_with?: String;
+  email_not_starts_with?: String;
+  email_ends_with?: String;
+  email_not_ends_with?: String;
+  password?: String;
+  password_not?: String;
+  password_in?: String[] | String;
+  password_not_in?: String[] | String;
+  password_lt?: String;
+  password_lte?: String;
+  password_gt?: String;
+  password_gte?: String;
+  password_contains?: String;
+  password_not_contains?: String;
+  password_starts_with?: String;
+  password_not_starts_with?: String;
+  password_ends_with?: String;
+  password_not_ends_with?: String;
+  created_airshows_some?: AirshowWhereInput;
+  created_parking_lots_some?: ParkingLotWhereInput;
+  created_zones_some?: ZoneWhereInput;
+  created_tracking_some?: TrackingWhereInput;
+  edited_airshows_some?: AirshowWhereInput;
+  edited_parking_lots_some?: ParkingLotWhereInput;
+  edited_zones_some?: ZoneWhereInput;
+  edited_tracking_some?: TrackingWhereInput;
+  AND?: UserWhereInput[] | UserWhereInput;
+}
+
+export interface AirshowUpdateWithoutUpdatedByDataInput {
+  id?: ID_Input;
+  createdAt?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  name?: String;
+  date?: String;
+  createdBy?: UserUpdateOneRequiredWithoutCreated_airshowsInput;
+}
+
+export interface AirshowSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: AirshowWhereInput;
+  AND?: AirshowSubscriptionWhereInput[] | AirshowSubscriptionWhereInput;
+}
+
+export interface AirshowUpsertWithWhereUniqueWithoutUpdatedByInput {
+  where: AirshowWhereUniqueInput;
+  update: AirshowUpdateWithoutUpdatedByDataInput;
+  create: AirshowCreateWithoutUpdatedByInput;
+}
+
+export interface AddressWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  address_line?: String;
+  address_line_not?: String;
+  address_line_in?: String[] | String;
+  address_line_not_in?: String[] | String;
+  address_line_lt?: String;
+  address_line_lte?: String;
+  address_line_gt?: String;
+  address_line_gte?: String;
+  address_line_contains?: String;
+  address_line_not_contains?: String;
+  address_line_starts_with?: String;
+  address_line_not_starts_with?: String;
+  address_line_ends_with?: String;
+  address_line_not_ends_with?: String;
+  address_line_two?: String;
+  address_line_two_not?: String;
+  address_line_two_in?: String[] | String;
+  address_line_two_not_in?: String[] | String;
+  address_line_two_lt?: String;
+  address_line_two_lte?: String;
+  address_line_two_gt?: String;
+  address_line_two_gte?: String;
+  address_line_two_contains?: String;
+  address_line_two_not_contains?: String;
+  address_line_two_starts_with?: String;
+  address_line_two_not_starts_with?: String;
+  address_line_two_ends_with?: String;
+  address_line_two_not_ends_with?: String;
+  zipcode?: String;
+  zipcode_not?: String;
+  zipcode_in?: String[] | String;
+  zipcode_not_in?: String[] | String;
+  zipcode_lt?: String;
+  zipcode_lte?: String;
+  zipcode_gt?: String;
+  zipcode_gte?: String;
+  zipcode_contains?: String;
+  zipcode_not_contains?: String;
+  zipcode_starts_with?: String;
+  zipcode_not_starts_with?: String;
+  zipcode_ends_with?: String;
+  zipcode_not_ends_with?: String;
+  city?: String;
+  city_not?: String;
+  city_in?: String[] | String;
+  city_not_in?: String[] | String;
+  city_lt?: String;
+  city_lte?: String;
+  city_gt?: String;
+  city_gte?: String;
+  city_contains?: String;
+  city_not_contains?: String;
+  city_starts_with?: String;
+  city_not_starts_with?: String;
+  city_ends_with?: String;
+  city_not_ends_with?: String;
+  state?: String;
+  state_not?: String;
+  state_in?: String[] | String;
+  state_not_in?: String[] | String;
+  state_lt?: String;
+  state_lte?: String;
+  state_gt?: String;
+  state_gte?: String;
+  state_contains?: String;
+  state_not_contains?: String;
+  state_starts_with?: String;
+  state_not_starts_with?: String;
+  state_ends_with?: String;
+  state_not_ends_with?: String;
+  AND?: AddressWhereInput[] | AddressWhereInput;
+}
+
+export interface AirshowScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  date?: String;
+  date_not?: String;
+  date_in?: String[] | String;
+  date_not_in?: String[] | String;
+  date_lt?: String;
+  date_lte?: String;
+  date_gt?: String;
+  date_gte?: String;
+  date_contains?: String;
+  date_not_contains?: String;
+  date_starts_with?: String;
+  date_not_starts_with?: String;
+  date_ends_with?: String;
+  date_not_ends_with?: String;
+  AND?: AirshowScalarWhereInput[] | AirshowScalarWhereInput;
+  OR?: AirshowScalarWhereInput[] | AirshowScalarWhereInput;
+  NOT?: AirshowScalarWhereInput[] | AirshowScalarWhereInput;
+}
+
+export interface TrackingUpdateManyMutationInput {
+  id?: ID_Input;
+  createdAt?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  vehicle_count?: Int;
+  bus_count?: Int;
+  passenger_count?: Int;
+}
+
+export interface AirshowUpdateManyWithWhereNestedInput {
+  where: AirshowScalarWhereInput;
+  data: AirshowUpdateManyDataInput;
+}
+
+export interface ParkingLotUpdateManyMutationInput {
+  id?: ID_Input;
+  createdAt?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  name?: String;
+  vehicle_capacity?: Int;
+  estimated_travel_distance?: Int;
+  estimated_travel_time?: Int;
+}
+
+export interface AirshowUpdateManyDataInput {
+  id?: ID_Input;
+  createdAt?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  name?: String;
+  date?: String;
+}
+
+export interface UserUpsertWithoutCreated_airshowsInput {
+  update: UserUpdateWithoutCreated_airshowsDataInput;
+  create: UserCreateWithoutCreated_airshowsInput;
+}
+
+export interface ParkingLotUpdateManyWithoutUpdatedByInput {
+  create?:
+    | ParkingLotCreateWithoutUpdatedByInput[]
+    | ParkingLotCreateWithoutUpdatedByInput;
+  delete?: ParkingLotWhereUniqueInput[] | ParkingLotWhereUniqueInput;
+  connect?: ParkingLotWhereUniqueInput[] | ParkingLotWhereUniqueInput;
+  set?: ParkingLotWhereUniqueInput[] | ParkingLotWhereUniqueInput;
+  disconnect?: ParkingLotWhereUniqueInput[] | ParkingLotWhereUniqueInput;
+  update?:
+    | ParkingLotUpdateWithWhereUniqueWithoutUpdatedByInput[]
+    | ParkingLotUpdateWithWhereUniqueWithoutUpdatedByInput;
+  upsert?:
+    | ParkingLotUpsertWithWhereUniqueWithoutUpdatedByInput[]
+    | ParkingLotUpsertWithWhereUniqueWithoutUpdatedByInput;
+  deleteMany?: ParkingLotScalarWhereInput[] | ParkingLotScalarWhereInput;
+  updateMany?:
+    | ParkingLotUpdateManyWithWhereNestedInput[]
+    | ParkingLotUpdateManyWithWhereNestedInput;
+}
+
+export interface AirshowUpsertWithWhereUniqueWithoutCreatedByInput {
+  where: AirshowWhereUniqueInput;
+  update: AirshowUpdateWithoutCreatedByDataInput;
+  create: AirshowCreateWithoutCreatedByInput;
+}
+
+export interface ParkingLotUpdateWithWhereUniqueWithoutUpdatedByInput {
+  where: ParkingLotWhereUniqueInput;
+  data: ParkingLotUpdateWithoutUpdatedByDataInput;
+}
+
+export interface UserUpsertWithWhereUniqueWithoutEdited_zonesInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateWithoutEdited_zonesDataInput;
+  create: UserCreateWithoutEdited_zonesInput;
+}
+
+export interface ParkingLotUpdateWithoutUpdatedByDataInput {
+  id?: ID_Input;
+  createdAt?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  name?: String;
+  address?: AddressUpdateManyInput;
+  vehicle_capacity?: Int;
+  estimated_travel_distance?: Int;
+  estimated_travel_time?: Int;
+  zone?: ZoneUpdateOneRequiredInput;
+  createdBy?: UserUpdateOneRequiredWithoutCreated_parking_lotsInput;
+}
+
+export interface AddressCreateInput {
+  id: ID_Input;
+  createdAt: DateTimeInput;
+  updatedAt: DateTimeInput;
+  address_line: String;
+  address_line_two?: String;
+  zipcode: String;
+  city: String;
+  state: String;
+}
+
+export interface ParkingLotUpsertWithWhereUniqueWithoutUpdatedByInput {
+  where: ParkingLotWhereUniqueInput;
+  update: ParkingLotUpdateWithoutUpdatedByDataInput;
+  create: ParkingLotCreateWithoutUpdatedByInput;
+}
+
+export interface UserUpdateWithWhereUniqueWithoutEdited_trackingInput {
+  where: UserWhereUniqueInput;
+  data: UserUpdateWithoutEdited_trackingDataInput;
+}
+
+export interface ParkingLotScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  vehicle_capacity?: Int;
+  vehicle_capacity_not?: Int;
+  vehicle_capacity_in?: Int[] | Int;
+  vehicle_capacity_not_in?: Int[] | Int;
+  vehicle_capacity_lt?: Int;
+  vehicle_capacity_lte?: Int;
+  vehicle_capacity_gt?: Int;
+  vehicle_capacity_gte?: Int;
+  estimated_travel_distance?: Int;
+  estimated_travel_distance_not?: Int;
+  estimated_travel_distance_in?: Int[] | Int;
+  estimated_travel_distance_not_in?: Int[] | Int;
+  estimated_travel_distance_lt?: Int;
+  estimated_travel_distance_lte?: Int;
+  estimated_travel_distance_gt?: Int;
+  estimated_travel_distance_gte?: Int;
+  estimated_travel_time?: Int;
+  estimated_travel_time_not?: Int;
+  estimated_travel_time_in?: Int[] | Int;
+  estimated_travel_time_not_in?: Int[] | Int;
+  estimated_travel_time_lt?: Int;
+  estimated_travel_time_lte?: Int;
+  estimated_travel_time_gt?: Int;
+  estimated_travel_time_gte?: Int;
+  AND?: ParkingLotScalarWhereInput[] | ParkingLotScalarWhereInput;
+  OR?: ParkingLotScalarWhereInput[] | ParkingLotScalarWhereInput;
+  NOT?: ParkingLotScalarWhereInput[] | ParkingLotScalarWhereInput;
+}
+
+export interface ParkingLotCreateManyWithoutCreatedByInput {
+  create?:
+    | ParkingLotCreateWithoutCreatedByInput[]
+    | ParkingLotCreateWithoutCreatedByInput;
+  connect?: ParkingLotWhereUniqueInput[] | ParkingLotWhereUniqueInput;
+}
+
+export interface ParkingLotUpdateManyWithWhereNestedInput {
+  where: ParkingLotScalarWhereInput;
+  data: ParkingLotUpdateManyDataInput;
+}
+
+export interface ZoneCreateInput {
+  id: ID_Input;
+  createdAt: DateTimeInput;
+  updatedAt: DateTimeInput;
+  name: String;
+  lot_count: Int;
+  createdBy: UserCreateOneWithoutCreated_zonesInput;
+  updatedBy?: UserCreateManyWithoutEdited_zonesInput;
+}
+
+export interface ParkingLotUpdateManyDataInput {
+  id?: ID_Input;
+  createdAt?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  name?: String;
+  vehicle_capacity?: Int;
+  estimated_travel_distance?: Int;
+  estimated_travel_time?: Int;
+}
+
+export interface AirshowCreateWithoutCreatedByInput {
+  id: ID_Input;
+  createdAt: DateTimeInput;
+  updatedAt: DateTimeInput;
+  name: String;
+  date: String;
+  updatedBy?: UserCreateManyWithoutEdited_airshowsInput;
+}
+
+export interface ZoneUpdateManyWithoutUpdatedByInput {
+  create?: ZoneCreateWithoutUpdatedByInput[] | ZoneCreateWithoutUpdatedByInput;
+  delete?: ZoneWhereUniqueInput[] | ZoneWhereUniqueInput;
+  connect?: ZoneWhereUniqueInput[] | ZoneWhereUniqueInput;
+  set?: ZoneWhereUniqueInput[] | ZoneWhereUniqueInput;
+  disconnect?: ZoneWhereUniqueInput[] | ZoneWhereUniqueInput;
+  update?:
+    | ZoneUpdateWithWhereUniqueWithoutUpdatedByInput[]
+    | ZoneUpdateWithWhereUniqueWithoutUpdatedByInput;
+  upsert?:
+    | ZoneUpsertWithWhereUniqueWithoutUpdatedByInput[]
+    | ZoneUpsertWithWhereUniqueWithoutUpdatedByInput;
+  deleteMany?: ZoneScalarWhereInput[] | ZoneScalarWhereInput;
+  updateMany?:
+    | ZoneUpdateManyWithWhereNestedInput[]
+    | ZoneUpdateManyWithWhereNestedInput;
+}
+
+export interface ZoneCreateWithoutCreatedByInput {
+  id: ID_Input;
+  createdAt: DateTimeInput;
+  updatedAt: DateTimeInput;
+  name: String;
+  lot_count: Int;
+  updatedBy?: UserCreateManyWithoutEdited_zonesInput;
+}
+
+export interface ZoneUpdateWithWhereUniqueWithoutUpdatedByInput {
+  where: ZoneWhereUniqueInput;
+  data: ZoneUpdateWithoutUpdatedByDataInput;
+}
+
+export interface TrackingCreateWithoutCreatedByInput {
+  id: ID_Input;
+  createdAt: DateTimeInput;
+  updatedAt: DateTimeInput;
+  airshow: AirshowCreateOneInput;
+  parking_lot?: ParkingLotCreateOneInput;
+  zone?: ZoneCreateOneInput;
+  vehicle_count: Int;
+  bus_count: Int;
+  passenger_count: Int;
+  updatedBy?: UserCreateManyWithoutEdited_trackingInput;
+}
+
+export interface ZoneUpdateWithoutUpdatedByDataInput {
+  id?: ID_Input;
+  createdAt?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  name?: String;
+  lot_count?: Int;
+  createdBy?: UserUpdateOneRequiredWithoutCreated_zonesInput;
+}
+
+export interface UserCreateOneWithoutCreated_parking_lotsInput {
+  create?: UserCreateWithoutCreated_parking_lotsInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface ZoneUpsertWithWhereUniqueWithoutUpdatedByInput {
+  where: ZoneWhereUniqueInput;
+  update: ZoneUpdateWithoutUpdatedByDataInput;
+  create: ZoneCreateWithoutUpdatedByInput;
+}
+
+export interface ParkingLotCreateManyWithoutUpdatedByInput {
+  create?:
+    | ParkingLotCreateWithoutUpdatedByInput[]
+    | ParkingLotCreateWithoutUpdatedByInput;
+  connect?: ParkingLotWhereUniqueInput[] | ParkingLotWhereUniqueInput;
+}
+
+export interface ZoneScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  lot_count?: Int;
+  lot_count_not?: Int;
+  lot_count_in?: Int[] | Int;
+  lot_count_not_in?: Int[] | Int;
+  lot_count_lt?: Int;
+  lot_count_lte?: Int;
+  lot_count_gt?: Int;
+  lot_count_gte?: Int;
+  AND?: ZoneScalarWhereInput[] | ZoneScalarWhereInput;
+  OR?: ZoneScalarWhereInput[] | ZoneScalarWhereInput;
+  NOT?: ZoneScalarWhereInput[] | ZoneScalarWhereInput;
+}
+
+export interface TrackingCreateManyWithoutUpdatedByInput {
+  create?:
+    | TrackingCreateWithoutUpdatedByInput[]
+    | TrackingCreateWithoutUpdatedByInput;
+  connect?: TrackingWhereUniqueInput[] | TrackingWhereUniqueInput;
+}
+
+export interface ZoneUpdateManyWithWhereNestedInput {
+  where: ZoneScalarWhereInput;
+  data: ZoneUpdateManyDataInput;
+}
+
+export interface UserCreateManyWithoutEdited_parking_lotsInput {
+  create?:
+    | UserCreateWithoutEdited_parking_lotsInput[]
+    | UserCreateWithoutEdited_parking_lotsInput;
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+}
+
+export interface ZoneUpdateManyDataInput {
+  id?: ID_Input;
+  createdAt?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  name?: String;
+  lot_count?: Int;
+}
+
+export interface ParkingLotSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: ParkingLotWhereInput;
+  AND?: ParkingLotSubscriptionWhereInput[] | ParkingLotSubscriptionWhereInput;
+}
+
+export interface TrackingUpdateManyWithoutUpdatedByInput {
+  create?:
+    | TrackingCreateWithoutUpdatedByInput[]
+    | TrackingCreateWithoutUpdatedByInput;
+  delete?: TrackingWhereUniqueInput[] | TrackingWhereUniqueInput;
+  connect?: TrackingWhereUniqueInput[] | TrackingWhereUniqueInput;
+  set?: TrackingWhereUniqueInput[] | TrackingWhereUniqueInput;
+  disconnect?: TrackingWhereUniqueInput[] | TrackingWhereUniqueInput;
+  update?:
+    | TrackingUpdateWithWhereUniqueWithoutUpdatedByInput[]
+    | TrackingUpdateWithWhereUniqueWithoutUpdatedByInput;
+  upsert?:
+    | TrackingUpsertWithWhereUniqueWithoutUpdatedByInput[]
+    | TrackingUpsertWithWhereUniqueWithoutUpdatedByInput;
+  deleteMany?: TrackingScalarWhereInput[] | TrackingScalarWhereInput;
+  updateMany?:
+    | TrackingUpdateManyWithWhereNestedInput[]
+    | TrackingUpdateManyWithWhereNestedInput;
+}
+
+export interface ZoneUpdateManyMutationInput {
+  id?: ID_Input;
+  createdAt?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  name?: String;
+  lot_count?: Int;
+}
+
+export interface TrackingUpdateWithWhereUniqueWithoutUpdatedByInput {
+  where: TrackingWhereUniqueInput;
+  data: TrackingUpdateWithoutUpdatedByDataInput;
+}
+
+export interface TrackingCreateInput {
+  id: ID_Input;
+  createdAt: DateTimeInput;
+  updatedAt: DateTimeInput;
+  airshow: AirshowCreateOneInput;
+  parking_lot?: ParkingLotCreateOneInput;
+  zone?: ZoneCreateOneInput;
+  vehicle_count: Int;
+  bus_count: Int;
+  passenger_count: Int;
+  createdBy: UserCreateOneWithoutCreated_trackingInput;
+  updatedBy?: UserCreateManyWithoutEdited_trackingInput;
+}
+
+export interface TrackingUpdateWithoutUpdatedByDataInput {
+  id?: ID_Input;
+  createdAt?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  airshow?: AirshowUpdateOneRequiredInput;
+  parking_lot?: ParkingLotUpdateOneInput;
+  zone?: ZoneUpdateOneInput;
+  vehicle_count?: Int;
+  bus_count?: Int;
+  passenger_count?: Int;
+  createdBy?: UserUpdateOneRequiredWithoutCreated_trackingInput;
+}
+
+export interface UserUpsertWithoutCreated_zonesInput {
+  update: UserUpdateWithoutCreated_zonesDataInput;
+  create: UserCreateWithoutCreated_zonesInput;
+}
+
+export interface ZoneUpdateOneInput {
+  create?: ZoneCreateInput;
+  update?: ZoneUpdateDataInput;
+  upsert?: ZoneUpsertNestedInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
+  connect?: ZoneWhereUniqueInput;
+}
+
+export interface UserUpsertWithWhereUniqueWithoutEdited_trackingInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateWithoutEdited_trackingDataInput;
+  create: UserCreateWithoutEdited_trackingInput;
+}
+
+export interface ZoneUpsertNestedInput {
+  update: ZoneUpdateDataInput;
+  create: ZoneCreateInput;
+}
+
+export interface UserCreateOneWithoutCreated_airshowsInput {
+  create?: UserCreateWithoutCreated_airshowsInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface UserUpdateOneRequiredWithoutCreated_trackingInput {
+  create?: UserCreateWithoutCreated_trackingInput;
+  update?: UserUpdateWithoutCreated_trackingDataInput;
+  upsert?: UserUpsertWithoutCreated_trackingInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface UserCreateWithoutCreated_zonesInput {
+  id: ID_Input;
+  name: String;
+  email: String;
+  password: String;
+  created_airshows?: AirshowCreateManyWithoutCreatedByInput;
+  created_parking_lots?: ParkingLotCreateManyWithoutCreatedByInput;
+  created_tracking?: TrackingCreateManyWithoutCreatedByInput;
+  edited_airshows?: AirshowCreateManyWithoutUpdatedByInput;
+  edited_parking_lots?: ParkingLotCreateManyWithoutUpdatedByInput;
+  edited_zones?: ZoneCreateManyWithoutUpdatedByInput;
+  edited_tracking?: TrackingCreateManyWithoutUpdatedByInput;
+}
+
+export interface UserUpdateWithoutCreated_trackingDataInput {
+  id?: ID_Input;
+  name?: String;
+  email?: String;
+  password?: String;
+  created_airshows?: AirshowUpdateManyWithoutCreatedByInput;
+  created_parking_lots?: ParkingLotUpdateManyWithoutCreatedByInput;
+  created_zones?: ZoneUpdateManyWithoutCreatedByInput;
+  edited_airshows?: AirshowUpdateManyWithoutUpdatedByInput;
+  edited_parking_lots?: ParkingLotUpdateManyWithoutUpdatedByInput;
+  edited_zones?: ZoneUpdateManyWithoutUpdatedByInput;
+  edited_tracking?: TrackingUpdateManyWithoutUpdatedByInput;
+}
+
+export interface UserCreateWithoutEdited_zonesInput {
+  id: ID_Input;
+  name: String;
+  email: String;
+  password: String;
+  created_airshows?: AirshowCreateManyWithoutCreatedByInput;
+  created_parking_lots?: ParkingLotCreateManyWithoutCreatedByInput;
+  created_zones?: ZoneCreateManyWithoutCreatedByInput;
+  created_tracking?: TrackingCreateManyWithoutCreatedByInput;
+  edited_airshows?: AirshowCreateManyWithoutUpdatedByInput;
+  edited_parking_lots?: ParkingLotCreateManyWithoutUpdatedByInput;
+  edited_tracking?: TrackingCreateManyWithoutUpdatedByInput;
+}
+
+export interface UserUpsertWithoutCreated_trackingInput {
+  update: UserUpdateWithoutCreated_trackingDataInput;
+  create: UserCreateWithoutCreated_trackingInput;
+}
+
+export interface AirshowCreateManyWithoutUpdatedByInput {
+  create?:
+    | AirshowCreateWithoutUpdatedByInput[]
+    | AirshowCreateWithoutUpdatedByInput;
+  connect?: AirshowWhereUniqueInput[] | AirshowWhereUniqueInput;
+}
+
+export interface TrackingUpsertWithWhereUniqueWithoutUpdatedByInput {
+  where: TrackingWhereUniqueInput;
+  update: TrackingUpdateWithoutUpdatedByDataInput;
+  create: TrackingCreateWithoutUpdatedByInput;
+}
+
+export interface UserCreateOneWithoutCreated_trackingInput {
+  create?: UserCreateWithoutCreated_trackingInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface TrackingScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  vehicle_count?: Int;
+  vehicle_count_not?: Int;
+  vehicle_count_in?: Int[] | Int;
+  vehicle_count_not_in?: Int[] | Int;
+  vehicle_count_lt?: Int;
+  vehicle_count_lte?: Int;
+  vehicle_count_gt?: Int;
+  vehicle_count_gte?: Int;
+  bus_count?: Int;
+  bus_count_not?: Int;
+  bus_count_in?: Int[] | Int;
+  bus_count_not_in?: Int[] | Int;
+  bus_count_lt?: Int;
+  bus_count_lte?: Int;
+  bus_count_gt?: Int;
+  bus_count_gte?: Int;
+  passenger_count?: Int;
+  passenger_count_not?: Int;
+  passenger_count_in?: Int[] | Int;
+  passenger_count_not_in?: Int[] | Int;
+  passenger_count_lt?: Int;
+  passenger_count_lte?: Int;
+  passenger_count_gt?: Int;
+  passenger_count_gte?: Int;
+  AND?: TrackingScalarWhereInput[] | TrackingScalarWhereInput;
+  OR?: TrackingScalarWhereInput[] | TrackingScalarWhereInput;
+  NOT?: TrackingScalarWhereInput[] | TrackingScalarWhereInput;
+}
+
+export interface ZoneWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  lot_count?: Int;
+  lot_count_not?: Int;
+  lot_count_in?: Int[] | Int;
+  lot_count_not_in?: Int[] | Int;
+  lot_count_lt?: Int;
+  lot_count_lte?: Int;
+  lot_count_gt?: Int;
+  lot_count_gte?: Int;
+  createdBy?: UserWhereInput;
+  updatedBy_some?: UserWhereInput;
+  AND?: ZoneWhereInput[] | ZoneWhereInput;
+}
+
+export interface TrackingUpdateManyWithWhereNestedInput {
+  where: TrackingScalarWhereInput;
+  data: TrackingUpdateManyDataInput;
+}
+
+export interface AirshowUpdateManyMutationInput {
+  id?: ID_Input;
+  createdAt?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  name?: String;
+  date?: String;
+}
+
+export interface TrackingUpdateManyDataInput {
+  id?: ID_Input;
+  createdAt?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  vehicle_count?: Int;
+  bus_count?: Int;
+  passenger_count?: Int;
+}
+
+export interface AddressUpdateManyMutationInput {
+  id?: ID_Input;
+  createdAt?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  address_line?: String;
+  address_line_two?: String;
+  zipcode?: String;
+  city?: String;
+  state?: String;
+}
+
+export interface UserUpsertWithoutCreated_parking_lotsInput {
+  update: UserUpdateWithoutCreated_parking_lotsDataInput;
+  create: UserCreateWithoutCreated_parking_lotsInput;
+}
+
+export interface UserCreateWithoutEdited_airshowsInput {
+  id: ID_Input;
+  name: String;
+  email: String;
+  password: String;
+  created_airshows?: AirshowCreateManyWithoutCreatedByInput;
+  created_parking_lots?: ParkingLotCreateManyWithoutCreatedByInput;
+  created_zones?: ZoneCreateManyWithoutCreatedByInput;
+  created_tracking?: TrackingCreateManyWithoutCreatedByInput;
+  edited_parking_lots?: ParkingLotCreateManyWithoutUpdatedByInput;
+  edited_zones?: ZoneCreateManyWithoutUpdatedByInput;
+  edited_tracking?: TrackingCreateManyWithoutUpdatedByInput;
+}
+
+export interface UserUpdateManyWithoutEdited_parking_lotsInput {
+  create?:
+    | UserCreateWithoutEdited_parking_lotsInput[]
+    | UserCreateWithoutEdited_parking_lotsInput;
+  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  set?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  update?:
+    | UserUpdateWithWhereUniqueWithoutEdited_parking_lotsInput[]
+    | UserUpdateWithWhereUniqueWithoutEdited_parking_lotsInput;
+  upsert?:
+    | UserUpsertWithWhereUniqueWithoutEdited_parking_lotsInput[]
+    | UserUpsertWithWhereUniqueWithoutEdited_parking_lotsInput;
+  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput;
+  updateMany?:
+    | UserUpdateManyWithWhereNestedInput[]
+    | UserUpdateManyWithWhereNestedInput;
+}
+
+export interface ZoneCreateManyWithoutUpdatedByInput {
+  create?: ZoneCreateWithoutUpdatedByInput[] | ZoneCreateWithoutUpdatedByInput;
+  connect?: ZoneWhereUniqueInput[] | ZoneWhereUniqueInput;
+}
+
+export interface UserUpdateWithWhereUniqueWithoutEdited_parking_lotsInput {
+  where: UserWhereUniqueInput;
+  data: UserUpdateWithoutEdited_parking_lotsDataInput;
+}
+
+export interface UserUpdateInput {
+  id?: ID_Input;
+  name?: String;
+  email?: String;
+  password?: String;
+  created_airshows?: AirshowUpdateManyWithoutCreatedByInput;
+  created_parking_lots?: ParkingLotUpdateManyWithoutCreatedByInput;
+  created_zones?: ZoneUpdateManyWithoutCreatedByInput;
+  created_tracking?: TrackingUpdateManyWithoutCreatedByInput;
+  edited_airshows?: AirshowUpdateManyWithoutUpdatedByInput;
+  edited_parking_lots?: ParkingLotUpdateManyWithoutUpdatedByInput;
+  edited_zones?: ZoneUpdateManyWithoutUpdatedByInput;
+  edited_tracking?: TrackingUpdateManyWithoutUpdatedByInput;
+}
+
+export interface UserUpdateManyWithWhereNestedInput {
+  where: UserScalarWhereInput;
+  data: UserUpdateManyDataInput;
+}
+
+export interface UserScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  email?: String;
+  email_not?: String;
+  email_in?: String[] | String;
+  email_not_in?: String[] | String;
+  email_lt?: String;
+  email_lte?: String;
+  email_gt?: String;
+  email_gte?: String;
+  email_contains?: String;
+  email_not_contains?: String;
+  email_starts_with?: String;
+  email_not_starts_with?: String;
+  email_ends_with?: String;
+  email_not_ends_with?: String;
+  password?: String;
+  password_not?: String;
+  password_in?: String[] | String;
+  password_not_in?: String[] | String;
+  password_lt?: String;
+  password_lte?: String;
+  password_gt?: String;
+  password_gte?: String;
+  password_contains?: String;
+  password_not_contains?: String;
+  password_starts_with?: String;
+  password_not_starts_with?: String;
+  password_ends_with?: String;
+  password_not_ends_with?: String;
+  AND?: UserScalarWhereInput[] | UserScalarWhereInput;
+  OR?: UserScalarWhereInput[] | UserScalarWhereInput;
+  NOT?: UserScalarWhereInput[] | UserScalarWhereInput;
+}
+
+export interface UserUpsertWithWhereUniqueWithoutEdited_parking_lotsInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateWithoutEdited_parking_lotsDataInput;
+  create: UserCreateWithoutEdited_parking_lotsInput;
+}
+
+export interface UserUpdateWithoutEdited_parking_lotsDataInput {
+  id?: ID_Input;
+  name?: String;
+  email?: String;
+  password?: String;
+  created_airshows?: AirshowUpdateManyWithoutCreatedByInput;
+  created_parking_lots?: ParkingLotUpdateManyWithoutCreatedByInput;
+  created_zones?: ZoneUpdateManyWithoutCreatedByInput;
+  created_tracking?: TrackingUpdateManyWithoutCreatedByInput;
+  edited_airshows?: AirshowUpdateManyWithoutUpdatedByInput;
+  edited_zones?: ZoneUpdateManyWithoutUpdatedByInput;
+  edited_tracking?: TrackingUpdateManyWithoutUpdatedByInput;
+}
+
+export interface ZoneUpsertWithWhereUniqueWithoutCreatedByInput {
+  where: ZoneWhereUniqueInput;
+  update: ZoneUpdateWithoutCreatedByDataInput;
+  create: ZoneCreateWithoutCreatedByInput;
+}
+
+export interface ZoneSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: ZoneWhereInput;
+  AND?: ZoneSubscriptionWhereInput[] | ZoneSubscriptionWhereInput;
+}
+
+export interface ParkingLotCreateOneInput {
+  create?: ParkingLotCreateInput;
+  connect?: ParkingLotWhereUniqueInput;
+}
+
+export interface AddressCreateManyInput {
+  create?: AddressCreateInput[] | AddressCreateInput;
+  connect?: AddressWhereUniqueInput[] | AddressWhereUniqueInput;
+}
 
 export interface NodeNode {
   id: ID_Output;
@@ -1359,30 +2714,96 @@ export interface ZonePreviousValuesSubscription
   lot_count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface Zone {
+export interface Tracking {
   id: ID_Output;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
-  name: String;
-  lot_count: Int;
+  vehicle_count: Int;
+  bus_count: Int;
+  passenger_count: Int;
 }
 
-export interface ZonePromise extends Promise<Zone>, Fragmentable {
+export interface TrackingPromise extends Promise<Tracking>, Fragmentable {
   id: () => Promise<ID_Output>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
-  name: () => Promise<String>;
-  lot_count: () => Promise<Int>;
+  airshow: <T = AirshowPromise>() => T;
+  parking_lot: <T = ParkingLotPromise>() => T;
+  zone: <T = ZonePromise>() => T;
+  vehicle_count: () => Promise<Int>;
+  bus_count: () => Promise<Int>;
+  passenger_count: () => Promise<Int>;
+  createdBy: <T = UserPromise>() => T;
+  updatedBy: <T = FragmentableArray<User>>(
+    args?: {
+      where?: UserWhereInput;
+      orderBy?: UserOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
 }
 
-export interface ZoneSubscription
-  extends Promise<AsyncIterator<Zone>>,
+export interface TrackingSubscription
+  extends Promise<AsyncIterator<Tracking>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  name: () => Promise<AsyncIterator<String>>;
-  lot_count: () => Promise<AsyncIterator<Int>>;
+  airshow: <T = AirshowSubscription>() => T;
+  parking_lot: <T = ParkingLotSubscription>() => T;
+  zone: <T = ZoneSubscription>() => T;
+  vehicle_count: () => Promise<AsyncIterator<Int>>;
+  bus_count: () => Promise<AsyncIterator<Int>>;
+  passenger_count: () => Promise<AsyncIterator<Int>>;
+  createdBy: <T = UserSubscription>() => T;
+  updatedBy: <T = Promise<AsyncIterator<UserSubscription>>>(
+    args?: {
+      where?: UserWhereInput;
+      orderBy?: UserOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+}
+
+export interface AggregateAddress {
+  count: Int;
+}
+
+export interface AggregateAddressPromise
+  extends Promise<AggregateAddress>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateAddressSubscription
+  extends Promise<AsyncIterator<AggregateAddress>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface AddressEdge {
+  node: Address;
+  cursor: String;
+}
+
+export interface AddressEdgePromise extends Promise<AddressEdge>, Fragmentable {
+  node: <T = AddressPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface AddressEdgeSubscription
+  extends Promise<AsyncIterator<AddressEdge>>,
+    Fragmentable {
+  node: <T = AddressSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface PageInfo {
@@ -1433,45 +2854,87 @@ export interface UserPreviousValuesSubscription
   password: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregateAddress {
-  count: Int;
+export interface BatchPayload {
+  count: Long;
 }
 
-export interface AggregateAddressPromise
-  extends Promise<AggregateAddress>,
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
     Fragmentable {
-  count: () => Promise<Int>;
+  count: () => Promise<Long>;
 }
 
-export interface AggregateAddressSubscription
-  extends Promise<AsyncIterator<AggregateAddress>>,
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  count: () => Promise<AsyncIterator<Long>>;
 }
 
-export interface UserSubscriptionPayload {
-  mutation: MutationType;
-  node: User;
-  updatedFields: String[];
-  previousValues: UserPreviousValues;
+export interface Zone {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  name: String;
+  lot_count: Int;
 }
 
-export interface UserSubscriptionPayloadPromise
-  extends Promise<UserSubscriptionPayload>,
+export interface ZonePromise extends Promise<Zone>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  name: () => Promise<String>;
+  lot_count: () => Promise<Int>;
+  createdBy: <T = UserPromise>() => T;
+  updatedBy: <T = FragmentableArray<User>>(
+    args?: {
+      where?: UserWhereInput;
+      orderBy?: UserOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+}
+
+export interface ZoneSubscription
+  extends Promise<AsyncIterator<Zone>>,
     Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = UserPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = UserPreviousValuesPromise>() => T;
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  name: () => Promise<AsyncIterator<String>>;
+  lot_count: () => Promise<AsyncIterator<Int>>;
+  createdBy: <T = UserSubscription>() => T;
+  updatedBy: <T = Promise<AsyncIterator<UserSubscription>>>(
+    args?: {
+      where?: UserWhereInput;
+      orderBy?: UserOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
 }
 
-export interface UserSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
+export interface ZoneEdge {
+  node: Zone;
+  cursor: String;
+}
+
+export interface ZoneEdgePromise extends Promise<ZoneEdge>, Fragmentable {
+  node: <T = ZonePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ZoneEdgeSubscription
+  extends Promise<AsyncIterator<ZoneEdge>>,
     Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = UserSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = UserPreviousValuesSubscription>() => T;
+  node: <T = ZoneSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface ParkingLot {
@@ -1504,6 +2967,18 @@ export interface ParkingLotPromise extends Promise<ParkingLot>, Fragmentable {
   estimated_travel_distance: () => Promise<Int>;
   estimated_travel_time: () => Promise<Int>;
   zone: <T = ZonePromise>() => T;
+  createdBy: <T = UserPromise>() => T;
+  updatedBy: <T = FragmentableArray<User>>(
+    args?: {
+      where?: UserWhereInput;
+      orderBy?: UserOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
 }
 
 export interface ParkingLotSubscription
@@ -1528,114 +3003,80 @@ export interface ParkingLotSubscription
   estimated_travel_distance: () => Promise<AsyncIterator<Int>>;
   estimated_travel_time: () => Promise<AsyncIterator<Int>>;
   zone: <T = ZoneSubscription>() => T;
+  createdBy: <T = UserSubscription>() => T;
+  updatedBy: <T = Promise<AsyncIterator<UserSubscription>>>(
+    args?: {
+      where?: UserWhereInput;
+      orderBy?: UserOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
 }
 
-export interface BatchPayload {
-  count: Long;
-}
-
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
-    Fragmentable {
-  count: () => Promise<Long>;
-}
-
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
-}
-
-export interface ZoneEdge {
-  node: Zone;
-  cursor: String;
-}
-
-export interface ZoneEdgePromise extends Promise<ZoneEdge>, Fragmentable {
-  node: <T = ZonePromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface ZoneEdgeSubscription
-  extends Promise<AsyncIterator<ZoneEdge>>,
-    Fragmentable {
-  node: <T = ZoneSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateAirshow {
+export interface AggregateUser {
   count: Int;
 }
 
-export interface AggregateAirshowPromise
-  extends Promise<AggregateAirshow>,
+export interface AggregateUserPromise
+  extends Promise<AggregateUser>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateAirshowSubscription
-  extends Promise<AsyncIterator<AggregateAirshow>>,
+export interface AggregateUserSubscription
+  extends Promise<AsyncIterator<AggregateUser>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface ZoneSubscriptionPayload {
+export interface UserSubscriptionPayload {
   mutation: MutationType;
-  node: Zone;
+  node: User;
   updatedFields: String[];
-  previousValues: ZonePreviousValues;
+  previousValues: UserPreviousValues;
 }
 
-export interface ZoneSubscriptionPayloadPromise
-  extends Promise<ZoneSubscriptionPayload>,
+export interface UserSubscriptionPayloadPromise
+  extends Promise<UserSubscriptionPayload>,
     Fragmentable {
   mutation: () => Promise<MutationType>;
-  node: <T = ZonePromise>() => T;
+  node: <T = UserPromise>() => T;
   updatedFields: () => Promise<String[]>;
-  previousValues: <T = ZonePreviousValuesPromise>() => T;
+  previousValues: <T = UserPreviousValuesPromise>() => T;
 }
 
-export interface ZoneSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<ZoneSubscriptionPayload>>,
+export interface UserSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
     Fragmentable {
   mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = ZoneSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = ZonePreviousValuesSubscription>() => T;
-}
-
-export interface AirshowEdge {
-  node: Airshow;
-  cursor: String;
-}
-
-export interface AirshowEdgePromise extends Promise<AirshowEdge>, Fragmentable {
-  node: <T = AirshowPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface AirshowEdgeSubscription
-  extends Promise<AsyncIterator<AirshowEdge>>,
-    Fragmentable {
-  node: <T = AirshowSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface UserEdge {
-  node: User;
-  cursor: String;
-}
-
-export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
-  node: <T = UserPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface UserEdgeSubscription
-  extends Promise<AsyncIterator<UserEdge>>,
-    Fragmentable {
   node: <T = UserSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = UserPreviousValuesSubscription>() => T;
+}
+
+export interface UserConnection {
+  pageInfo: PageInfo;
+  edges: UserEdge[];
+}
+
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
+}
+
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
 }
 
 export interface Address {
@@ -1673,20 +3114,22 @@ export interface AddressSubscription
   state: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AddressEdge {
-  node: Address;
+export interface TrackingEdge {
+  node: Tracking;
   cursor: String;
 }
 
-export interface AddressEdgePromise extends Promise<AddressEdge>, Fragmentable {
-  node: <T = AddressPromise>() => T;
+export interface TrackingEdgePromise
+  extends Promise<TrackingEdge>,
+    Fragmentable {
+  node: <T = TrackingPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface AddressEdgeSubscription
-  extends Promise<AsyncIterator<AddressEdge>>,
+export interface TrackingEdgeSubscription
+  extends Promise<AsyncIterator<TrackingEdge>>,
     Fragmentable {
-  node: <T = AddressSubscription>() => T;
+  node: <T = TrackingSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
@@ -1715,18 +3158,18 @@ export interface AddressSubscriptionPayloadSubscription
   previousValues: <T = AddressPreviousValuesSubscription>() => T;
 }
 
-export interface AggregateTracking {
+export interface AggregateParkingLot {
   count: Int;
 }
 
-export interface AggregateTrackingPromise
-  extends Promise<AggregateTracking>,
+export interface AggregateParkingLotPromise
+  extends Promise<AggregateParkingLot>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateTrackingSubscription
-  extends Promise<AsyncIterator<AggregateTracking>>,
+export interface AggregateParkingLotSubscription
+  extends Promise<AsyncIterator<AggregateParkingLot>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
@@ -1768,62 +3211,63 @@ export interface AddressPreviousValuesSubscription
   state: () => Promise<AsyncIterator<String>>;
 }
 
-export interface TrackingConnection {
+export interface ParkingLotConnection {
   pageInfo: PageInfo;
-  edges: TrackingEdge[];
+  edges: ParkingLotEdge[];
 }
 
-export interface TrackingConnectionPromise
-  extends Promise<TrackingConnection>,
+export interface ParkingLotConnectionPromise
+  extends Promise<ParkingLotConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<TrackingEdge>>() => T;
-  aggregate: <T = AggregateTrackingPromise>() => T;
+  edges: <T = FragmentableArray<ParkingLotEdge>>() => T;
+  aggregate: <T = AggregateParkingLotPromise>() => T;
 }
 
-export interface TrackingConnectionSubscription
-  extends Promise<AsyncIterator<TrackingConnection>>,
+export interface ParkingLotConnectionSubscription
+  extends Promise<AsyncIterator<ParkingLotConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<TrackingEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateTrackingSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ParkingLotEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateParkingLotSubscription>() => T;
 }
 
-export interface AirshowConnection {
+export interface AddressConnection {
   pageInfo: PageInfo;
-  edges: AirshowEdge[];
+  edges: AddressEdge[];
 }
 
-export interface AirshowConnectionPromise
-  extends Promise<AirshowConnection>,
+export interface AddressConnectionPromise
+  extends Promise<AddressConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<AirshowEdge>>() => T;
-  aggregate: <T = AggregateAirshowPromise>() => T;
+  edges: <T = FragmentableArray<AddressEdge>>() => T;
+  aggregate: <T = AggregateAddressPromise>() => T;
 }
 
-export interface AirshowConnectionSubscription
-  extends Promise<AsyncIterator<AirshowConnection>>,
+export interface AddressConnectionSubscription
+  extends Promise<AsyncIterator<AddressConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<AirshowEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateAirshowSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<AddressEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateAddressSubscription>() => T;
 }
 
-export interface AggregateParkingLot {
-  count: Int;
+export interface AirshowEdge {
+  node: Airshow;
+  cursor: String;
 }
 
-export interface AggregateParkingLotPromise
-  extends Promise<AggregateParkingLot>,
+export interface AirshowEdgePromise extends Promise<AirshowEdge>, Fragmentable {
+  node: <T = AirshowPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface AirshowEdgeSubscription
+  extends Promise<AsyncIterator<AirshowEdge>>,
     Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateParkingLotSubscription
-  extends Promise<AsyncIterator<AggregateParkingLot>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  node: <T = AirshowSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface AirshowSubscriptionPayload {
@@ -1851,25 +3295,29 @@ export interface AirshowSubscriptionPayloadSubscription
   previousValues: <T = AirshowPreviousValuesSubscription>() => T;
 }
 
-export interface ParkingLotConnection {
-  pageInfo: PageInfo;
-  edges: ParkingLotEdge[];
+export interface ZoneSubscriptionPayload {
+  mutation: MutationType;
+  node: Zone;
+  updatedFields: String[];
+  previousValues: ZonePreviousValues;
 }
 
-export interface ParkingLotConnectionPromise
-  extends Promise<ParkingLotConnection>,
+export interface ZoneSubscriptionPayloadPromise
+  extends Promise<ZoneSubscriptionPayload>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<ParkingLotEdge>>() => T;
-  aggregate: <T = AggregateParkingLotPromise>() => T;
+  mutation: () => Promise<MutationType>;
+  node: <T = ZonePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ZonePreviousValuesPromise>() => T;
 }
 
-export interface ParkingLotConnectionSubscription
-  extends Promise<AsyncIterator<ParkingLotConnection>>,
+export interface ZoneSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ZoneSubscriptionPayload>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<ParkingLotEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateParkingLotSubscription>() => T;
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ZoneSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ZonePreviousValuesSubscription>() => T;
 }
 
 export interface AirshowPreviousValues {
@@ -1921,46 +3369,219 @@ export interface ZoneConnectionSubscription
   aggregate: <T = AggregateZoneSubscription>() => T;
 }
 
-export interface AddressConnection {
-  pageInfo: PageInfo;
-  edges: AddressEdge[];
+export interface User {
+  id: ID_Output;
+  name: String;
+  email: String;
+  password: String;
 }
 
-export interface AddressConnectionPromise
-  extends Promise<AddressConnection>,
+export interface UserPromise extends Promise<User>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  email: () => Promise<String>;
+  password: () => Promise<String>;
+  created_airshows: <T = FragmentableArray<Airshow>>(
+    args?: {
+      where?: AirshowWhereInput;
+      orderBy?: AirshowOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  created_parking_lots: <T = FragmentableArray<ParkingLot>>(
+    args?: {
+      where?: ParkingLotWhereInput;
+      orderBy?: ParkingLotOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  created_zones: <T = FragmentableArray<Zone>>(
+    args?: {
+      where?: ZoneWhereInput;
+      orderBy?: ZoneOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  created_tracking: <T = FragmentableArray<Tracking>>(
+    args?: {
+      where?: TrackingWhereInput;
+      orderBy?: TrackingOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  edited_airshows: <T = FragmentableArray<Airshow>>(
+    args?: {
+      where?: AirshowWhereInput;
+      orderBy?: AirshowOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  edited_parking_lots: <T = FragmentableArray<ParkingLot>>(
+    args?: {
+      where?: ParkingLotWhereInput;
+      orderBy?: ParkingLotOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  edited_zones: <T = FragmentableArray<Zone>>(
+    args?: {
+      where?: ZoneWhereInput;
+      orderBy?: ZoneOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  edited_tracking: <T = FragmentableArray<Tracking>>(
+    args?: {
+      where?: TrackingWhereInput;
+      orderBy?: TrackingOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+}
+
+export interface UserSubscription
+  extends Promise<AsyncIterator<User>>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<AddressEdge>>() => T;
-  aggregate: <T = AggregateAddressPromise>() => T;
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  password: () => Promise<AsyncIterator<String>>;
+  created_airshows: <T = Promise<AsyncIterator<AirshowSubscription>>>(
+    args?: {
+      where?: AirshowWhereInput;
+      orderBy?: AirshowOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  created_parking_lots: <T = Promise<AsyncIterator<ParkingLotSubscription>>>(
+    args?: {
+      where?: ParkingLotWhereInput;
+      orderBy?: ParkingLotOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  created_zones: <T = Promise<AsyncIterator<ZoneSubscription>>>(
+    args?: {
+      where?: ZoneWhereInput;
+      orderBy?: ZoneOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  created_tracking: <T = Promise<AsyncIterator<TrackingSubscription>>>(
+    args?: {
+      where?: TrackingWhereInput;
+      orderBy?: TrackingOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  edited_airshows: <T = Promise<AsyncIterator<AirshowSubscription>>>(
+    args?: {
+      where?: AirshowWhereInput;
+      orderBy?: AirshowOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  edited_parking_lots: <T = Promise<AsyncIterator<ParkingLotSubscription>>>(
+    args?: {
+      where?: ParkingLotWhereInput;
+      orderBy?: ParkingLotOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  edited_zones: <T = Promise<AsyncIterator<ZoneSubscription>>>(
+    args?: {
+      where?: ZoneWhereInput;
+      orderBy?: ZoneOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  edited_tracking: <T = Promise<AsyncIterator<TrackingSubscription>>>(
+    args?: {
+      where?: TrackingWhereInput;
+      orderBy?: TrackingOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
 }
 
-export interface AddressConnectionSubscription
-  extends Promise<AsyncIterator<AddressConnection>>,
+export interface AggregateTracking {
+  count: Int;
+}
+
+export interface AggregateTrackingPromise
+  extends Promise<AggregateTracking>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<AddressEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateAddressSubscription>() => T;
+  count: () => Promise<Int>;
 }
 
-export interface UserConnection {
-  pageInfo: PageInfo;
-  edges: UserEdge[];
-}
-
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
+export interface AggregateTrackingSubscription
+  extends Promise<AsyncIterator<AggregateTracking>>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<UserEdge>>() => T;
-  aggregate: <T = AggregateUserPromise>() => T;
-}
-
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateUserSubscription>() => T;
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface ParkingLotSubscriptionPayload {
@@ -1988,25 +3609,6 @@ export interface ParkingLotSubscriptionPayloadSubscription
   previousValues: <T = ParkingLotPreviousValuesSubscription>() => T;
 }
 
-export interface TrackingEdge {
-  node: Tracking;
-  cursor: String;
-}
-
-export interface TrackingEdgePromise
-  extends Promise<TrackingEdge>,
-    Fragmentable {
-  node: <T = TrackingPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface TrackingEdgeSubscription
-  extends Promise<AsyncIterator<TrackingEdge>>,
-    Fragmentable {
-  node: <T = TrackingSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
 export interface ParkingLotEdge {
   node: ParkingLot;
   cursor: String;
@@ -2024,6 +3626,27 @@ export interface ParkingLotEdgeSubscription
     Fragmentable {
   node: <T = ParkingLotSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AirshowConnection {
+  pageInfo: PageInfo;
+  edges: AirshowEdge[];
+}
+
+export interface AirshowConnectionPromise
+  extends Promise<AirshowConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<AirshowEdge>>() => T;
+  aggregate: <T = AggregateAirshowPromise>() => T;
+}
+
+export interface AirshowConnectionSubscription
+  extends Promise<AsyncIterator<AirshowConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<AirshowEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateAirshowSubscription>() => T;
 }
 
 export interface TrackingPreviousValues {
@@ -2096,6 +3719,18 @@ export interface AirshowPromise extends Promise<Airshow>, Fragmentable {
   updatedAt: () => Promise<DateTimeOutput>;
   name: () => Promise<String>;
   date: () => Promise<String>;
+  createdBy: <T = UserPromise>() => T;
+  updatedBy: <T = FragmentableArray<User>>(
+    args?: {
+      where?: UserWhereInput;
+      orderBy?: UserOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
 }
 
 export interface AirshowSubscription
@@ -2106,6 +3741,18 @@ export interface AirshowSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   name: () => Promise<AsyncIterator<String>>;
   date: () => Promise<AsyncIterator<String>>;
+  createdBy: <T = UserSubscription>() => T;
+  updatedBy: <T = Promise<AsyncIterator<UserSubscription>>>(
+    args?: {
+      where?: UserWhereInput;
+      orderBy?: UserOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
 }
 
 export interface ParkingLotPreviousValues {
@@ -2158,79 +3805,64 @@ export interface AggregateZoneSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface Tracking {
-  id: ID_Output;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-  vehicle_count: Int;
-  bus_count: Int;
-  passenger_count: Int;
-}
-
-export interface TrackingPromise extends Promise<Tracking>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  airshow: <T = AirshowPromise>() => T;
-  parking_lot: <T = ParkingLotPromise>() => T;
-  zone: <T = ZonePromise>() => T;
-  vehicle_count: () => Promise<Int>;
-  bus_count: () => Promise<Int>;
-  passenger_count: () => Promise<Int>;
-}
-
-export interface TrackingSubscription
-  extends Promise<AsyncIterator<Tracking>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  airshow: <T = AirshowSubscription>() => T;
-  parking_lot: <T = ParkingLotSubscription>() => T;
-  zone: <T = ZoneSubscription>() => T;
-  vehicle_count: () => Promise<AsyncIterator<Int>>;
-  bus_count: () => Promise<AsyncIterator<Int>>;
-  passenger_count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface User {
-  id: ID_Output;
-  name: String;
-  email: String;
-  password: String;
-}
-
-export interface UserPromise extends Promise<User>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  email: () => Promise<String>;
-  password: () => Promise<String>;
-}
-
-export interface UserSubscription
-  extends Promise<AsyncIterator<User>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  email: () => Promise<AsyncIterator<String>>;
-  password: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateUser {
+export interface AggregateAirshow {
   count: Int;
 }
 
-export interface AggregateUserPromise
-  extends Promise<AggregateUser>,
+export interface AggregateAirshowPromise
+  extends Promise<AggregateAirshow>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateUserSubscription
-  extends Promise<AsyncIterator<AggregateUser>>,
+export interface AggregateAirshowSubscription
+  extends Promise<AsyncIterator<AggregateAirshow>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
+
+export interface TrackingConnection {
+  pageInfo: PageInfo;
+  edges: TrackingEdge[];
+}
+
+export interface TrackingConnectionPromise
+  extends Promise<TrackingConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<TrackingEdge>>() => T;
+  aggregate: <T = AggregateTrackingPromise>() => T;
+}
+
+export interface TrackingConnectionSubscription
+  extends Promise<AsyncIterator<TrackingConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<TrackingEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateTrackingSubscription>() => T;
+}
+
+export interface UserEdge {
+  node: User;
+  cursor: String;
+}
+
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
+  node: <T = UserPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
+    Fragmentable {
+  node: <T = UserSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
 
 /*
 The `Boolean` scalar type represents `true` or `false`.
@@ -2250,20 +3882,15 @@ DateTime scalar output type, which is always a string
 export type DateTimeOutput = string;
 
 /*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
 */
-export type String = string;
+export type ID_Input = string | number;
+export type ID_Output = string;
 
 /*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
 */
 export type Int = number;
-
-/*
-The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
-*/
-export type ID_Input = string | number;
-export type ID_Output = string;
 
 /**
  * Model Metadata
