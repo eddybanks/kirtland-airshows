@@ -405,10 +405,12 @@ export type TrackingOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface UserUpdateOneRequiredWithoutCreated_zonesInput {
+export interface UserUpdateOneWithoutCreated_zonesInput {
   create?: UserCreateWithoutCreated_zonesInput;
   update?: UserUpdateWithoutCreated_zonesDataInput;
   upsert?: UserUpsertWithoutCreated_zonesInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
   connect?: UserWhereUniqueInput;
 }
 
@@ -459,7 +461,7 @@ export interface AirshowUpdateInput {
   updatedAt?: DateTimeInput;
   name?: String;
   date?: String;
-  createdBy?: UserUpdateOneRequiredWithoutCreated_airshowsInput;
+  createdBy?: UserUpdateOneWithoutCreated_airshowsInput;
   updatedBy?: UserUpdateManyWithoutEdited_airshowsInput;
 }
 
@@ -472,10 +474,12 @@ export interface UserSubscriptionWhereInput {
   AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
 }
 
-export interface UserUpdateOneRequiredWithoutCreated_airshowsInput {
+export interface UserUpdateOneWithoutCreated_airshowsInput {
   create?: UserCreateWithoutCreated_airshowsInput;
   update?: UserUpdateWithoutCreated_airshowsDataInput;
   upsert?: UserUpsertWithoutCreated_airshowsInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
   connect?: UserWhereUniqueInput;
 }
 
@@ -776,7 +780,7 @@ export interface ZoneUpdateInput {
   updatedAt?: DateTimeInput;
   name?: String;
   lot_count?: Int;
-  createdBy?: UserUpdateOneRequiredWithoutCreated_zonesInput;
+  createdBy?: UserUpdateOneWithoutCreated_zonesInput;
   updatedBy?: UserUpdateManyWithoutEdited_zonesInput;
 }
 
@@ -834,7 +838,7 @@ export interface TrackingUpdateInput {
   vehicle_count?: Int;
   bus_count?: Int;
   passenger_count?: Int;
-  createdBy?: UserUpdateOneRequiredWithoutCreated_trackingInput;
+  createdBy?: UserUpdateOneWithoutCreated_trackingInput;
   updatedBy?: UserUpdateManyWithoutEdited_trackingInput;
 }
 
@@ -963,7 +967,7 @@ export interface ParkingLotUpdateInput {
   estimated_travel_distance?: Int;
   estimated_travel_time?: Int;
   zone?: ZoneUpdateOneRequiredInput;
-  createdBy?: UserUpdateOneRequiredWithoutCreated_parking_lotsInput;
+  createdBy?: UserUpdateOneWithoutCreated_parking_lotsInput;
   updatedBy?: UserUpdateManyWithoutEdited_parking_lotsInput;
 }
 
@@ -1001,7 +1005,7 @@ export interface ZoneUpdateDataInput {
   updatedAt?: DateTimeInput;
   name?: String;
   lot_count?: Int;
-  createdBy?: UserUpdateOneRequiredWithoutCreated_zonesInput;
+  createdBy?: UserUpdateOneWithoutCreated_zonesInput;
   updatedBy?: UserUpdateManyWithoutEdited_zonesInput;
 }
 
@@ -1141,7 +1145,7 @@ export interface AirshowCreateInput {
   updatedAt: DateTimeInput;
   name: String;
   date: String;
-  createdBy: UserCreateOneWithoutCreated_airshowsInput;
+  createdBy?: UserCreateOneWithoutCreated_airshowsInput;
   updatedBy?: UserCreateManyWithoutEdited_airshowsInput;
 }
 
@@ -1358,7 +1362,7 @@ export interface ParkingLotCreateInput {
   estimated_travel_distance?: Int;
   estimated_travel_time?: Int;
   zone: ZoneCreateOneInput;
-  createdBy: UserCreateOneWithoutCreated_parking_lotsInput;
+  createdBy?: UserCreateOneWithoutCreated_parking_lotsInput;
   updatedBy?: UserCreateManyWithoutEdited_parking_lotsInput;
 }
 
@@ -1389,7 +1393,7 @@ export interface AirshowUpdateDataInput {
   updatedAt?: DateTimeInput;
   name?: String;
   date?: String;
-  createdBy?: UserUpdateOneRequiredWithoutCreated_airshowsInput;
+  createdBy?: UserUpdateOneWithoutCreated_airshowsInput;
   updatedBy?: UserUpdateManyWithoutEdited_airshowsInput;
 }
 
@@ -1399,7 +1403,7 @@ export interface AirshowCreateWithoutUpdatedByInput {
   updatedAt: DateTimeInput;
   name: String;
   date: String;
-  createdBy: UserCreateOneWithoutCreated_airshowsInput;
+  createdBy?: UserCreateOneWithoutCreated_airshowsInput;
 }
 
 export interface AirshowUpsertNestedInput {
@@ -1417,7 +1421,7 @@ export interface ParkingLotCreateWithoutUpdatedByInput {
   estimated_travel_distance?: Int;
   estimated_travel_time?: Int;
   zone: ZoneCreateOneInput;
-  createdBy: UserCreateOneWithoutCreated_parking_lotsInput;
+  createdBy?: UserCreateOneWithoutCreated_parking_lotsInput;
 }
 
 export interface ParkingLotUpdateOneInput {
@@ -1435,7 +1439,7 @@ export interface ZoneCreateWithoutUpdatedByInput {
   updatedAt: DateTimeInput;
   name: String;
   lot_count: Int;
-  createdBy: UserCreateOneWithoutCreated_zonesInput;
+  createdBy?: UserCreateOneWithoutCreated_zonesInput;
 }
 
 export interface ParkingLotUpdateDataInput {
@@ -1448,7 +1452,7 @@ export interface ParkingLotUpdateDataInput {
   estimated_travel_distance?: Int;
   estimated_travel_time?: Int;
   zone?: ZoneUpdateOneRequiredInput;
-  createdBy?: UserUpdateOneRequiredWithoutCreated_parking_lotsInput;
+  createdBy?: UserUpdateOneWithoutCreated_parking_lotsInput;
   updatedBy?: UserUpdateManyWithoutEdited_parking_lotsInput;
 }
 
@@ -1462,13 +1466,15 @@ export interface TrackingCreateWithoutUpdatedByInput {
   vehicle_count: Int;
   bus_count: Int;
   passenger_count: Int;
-  createdBy: UserCreateOneWithoutCreated_trackingInput;
+  createdBy?: UserCreateOneWithoutCreated_trackingInput;
 }
 
-export interface UserUpdateOneRequiredWithoutCreated_parking_lotsInput {
+export interface UserUpdateOneWithoutCreated_parking_lotsInput {
   create?: UserCreateWithoutCreated_parking_lotsInput;
   update?: UserUpdateWithoutCreated_parking_lotsDataInput;
   upsert?: UserUpsertWithoutCreated_parking_lotsInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
   connect?: UserWhereUniqueInput;
 }
 
@@ -1617,7 +1623,7 @@ export interface AirshowUpdateWithoutUpdatedByDataInput {
   updatedAt?: DateTimeInput;
   name?: String;
   date?: String;
-  createdBy?: UserUpdateOneRequiredWithoutCreated_airshowsInput;
+  createdBy?: UserUpdateOneWithoutCreated_airshowsInput;
 }
 
 export interface AirshowSubscriptionWhereInput {
@@ -1887,7 +1893,7 @@ export interface ParkingLotUpdateWithoutUpdatedByDataInput {
   estimated_travel_distance?: Int;
   estimated_travel_time?: Int;
   zone?: ZoneUpdateOneRequiredInput;
-  createdBy?: UserUpdateOneRequiredWithoutCreated_parking_lotsInput;
+  createdBy?: UserUpdateOneWithoutCreated_parking_lotsInput;
 }
 
 export interface AddressCreateInput {
@@ -2004,7 +2010,7 @@ export interface ZoneCreateInput {
   updatedAt: DateTimeInput;
   name: String;
   lot_count: Int;
-  createdBy: UserCreateOneWithoutCreated_zonesInput;
+  createdBy?: UserCreateOneWithoutCreated_zonesInput;
   updatedBy?: UserCreateManyWithoutEdited_zonesInput;
 }
 
@@ -2078,7 +2084,7 @@ export interface ZoneUpdateWithoutUpdatedByDataInput {
   updatedAt?: DateTimeInput;
   name?: String;
   lot_count?: Int;
-  createdBy?: UserUpdateOneRequiredWithoutCreated_zonesInput;
+  createdBy?: UserUpdateOneWithoutCreated_zonesInput;
 }
 
 export interface UserCreateOneWithoutCreated_parking_lotsInput {
@@ -2236,7 +2242,7 @@ export interface TrackingCreateInput {
   vehicle_count: Int;
   bus_count: Int;
   passenger_count: Int;
-  createdBy: UserCreateOneWithoutCreated_trackingInput;
+  createdBy?: UserCreateOneWithoutCreated_trackingInput;
   updatedBy?: UserCreateManyWithoutEdited_trackingInput;
 }
 
@@ -2250,7 +2256,7 @@ export interface TrackingUpdateWithoutUpdatedByDataInput {
   vehicle_count?: Int;
   bus_count?: Int;
   passenger_count?: Int;
-  createdBy?: UserUpdateOneRequiredWithoutCreated_trackingInput;
+  createdBy?: UserUpdateOneWithoutCreated_trackingInput;
 }
 
 export interface UserUpsertWithoutCreated_zonesInput {
@@ -2283,10 +2289,12 @@ export interface UserCreateOneWithoutCreated_airshowsInput {
   connect?: UserWhereUniqueInput;
 }
 
-export interface UserUpdateOneRequiredWithoutCreated_trackingInput {
+export interface UserUpdateOneWithoutCreated_trackingInput {
   create?: UserCreateWithoutCreated_trackingInput;
   update?: UserUpdateWithoutCreated_trackingDataInput;
   upsert?: UserUpsertWithoutCreated_trackingInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
   connect?: UserWhereUniqueInput;
 }
 

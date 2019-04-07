@@ -17,7 +17,7 @@ type Airshow {
   id: ID!
   name: String!
   date: String!
-  createdBy: User!
+  createdBy: User
   updatedBy: [User]
 }
 
@@ -25,7 +25,7 @@ type Zone {
   id: ID!
   name: String!
   lot_count: Int!
-  createdBy: User!
+  createdBy: User
   updatedBy: [User]
 }
 
@@ -37,7 +37,7 @@ type ParkingLot {
   estimated_travel_distance: Int
   estimated_travel_time: Int
   zone: Zone!
-  createdBy: User!
+  createdBy: User
   updatedBy: [User]
 }
 
@@ -58,7 +58,7 @@ type Tracking {
   vehicle_count: Int!
   bus_count: Int!
   passenger_count: Int!
-  createdBy: User!
+  createdBy: User
   updatedBy: [User]
 }
 

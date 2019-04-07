@@ -403,7 +403,7 @@ type Airshow {
   updatedAt: DateTime!
   name: String!
   date: String!
-  createdBy: User!
+  createdBy: User
   updatedBy(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
 }
 
@@ -419,7 +419,7 @@ input AirshowCreateInput {
   updatedAt: DateTime!
   name: String!
   date: String!
-  createdBy: UserCreateOneWithoutCreated_airshowsInput!
+  createdBy: UserCreateOneWithoutCreated_airshowsInput
   updatedBy: UserCreateManyWithoutEdited_airshowsInput
 }
 
@@ -453,7 +453,7 @@ input AirshowCreateWithoutUpdatedByInput {
   updatedAt: DateTime!
   name: String!
   date: String!
-  createdBy: UserCreateOneWithoutCreated_airshowsInput!
+  createdBy: UserCreateOneWithoutCreated_airshowsInput
 }
 
 type AirshowEdge {
@@ -568,7 +568,7 @@ input AirshowUpdateDataInput {
   updatedAt: DateTime
   name: String
   date: String
-  createdBy: UserUpdateOneRequiredWithoutCreated_airshowsInput
+  createdBy: UserUpdateOneWithoutCreated_airshowsInput
   updatedBy: UserUpdateManyWithoutEdited_airshowsInput
 }
 
@@ -578,7 +578,7 @@ input AirshowUpdateInput {
   updatedAt: DateTime
   name: String
   date: String
-  createdBy: UserUpdateOneRequiredWithoutCreated_airshowsInput
+  createdBy: UserUpdateOneWithoutCreated_airshowsInput
   updatedBy: UserUpdateManyWithoutEdited_airshowsInput
 }
 
@@ -649,7 +649,7 @@ input AirshowUpdateWithoutUpdatedByDataInput {
   updatedAt: DateTime
   name: String
   date: String
-  createdBy: UserUpdateOneRequiredWithoutCreated_airshowsInput
+  createdBy: UserUpdateOneWithoutCreated_airshowsInput
 }
 
 input AirshowUpdateWithWhereUniqueWithoutCreatedByInput {
@@ -821,7 +821,7 @@ type ParkingLot {
   estimated_travel_distance: Int
   estimated_travel_time: Int
   zone: Zone!
-  createdBy: User!
+  createdBy: User
   updatedBy(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
 }
 
@@ -841,7 +841,7 @@ input ParkingLotCreateInput {
   estimated_travel_distance: Int
   estimated_travel_time: Int
   zone: ZoneCreateOneInput!
-  createdBy: UserCreateOneWithoutCreated_parking_lotsInput!
+  createdBy: UserCreateOneWithoutCreated_parking_lotsInput
   updatedBy: UserCreateManyWithoutEdited_parking_lotsInput
 }
 
@@ -883,7 +883,7 @@ input ParkingLotCreateWithoutUpdatedByInput {
   estimated_travel_distance: Int
   estimated_travel_time: Int
   zone: ZoneCreateOneInput!
-  createdBy: UserCreateOneWithoutCreated_parking_lotsInput!
+  createdBy: UserCreateOneWithoutCreated_parking_lotsInput
 }
 
 type ParkingLotEdge {
@@ -1018,7 +1018,7 @@ input ParkingLotUpdateDataInput {
   estimated_travel_distance: Int
   estimated_travel_time: Int
   zone: ZoneUpdateOneRequiredInput
-  createdBy: UserUpdateOneRequiredWithoutCreated_parking_lotsInput
+  createdBy: UserUpdateOneWithoutCreated_parking_lotsInput
   updatedBy: UserUpdateManyWithoutEdited_parking_lotsInput
 }
 
@@ -1032,7 +1032,7 @@ input ParkingLotUpdateInput {
   estimated_travel_distance: Int
   estimated_travel_time: Int
   zone: ZoneUpdateOneRequiredInput
-  createdBy: UserUpdateOneRequiredWithoutCreated_parking_lotsInput
+  createdBy: UserUpdateOneWithoutCreated_parking_lotsInput
   updatedBy: UserUpdateManyWithoutEdited_parking_lotsInput
 }
 
@@ -1117,7 +1117,7 @@ input ParkingLotUpdateWithoutUpdatedByDataInput {
   estimated_travel_distance: Int
   estimated_travel_time: Int
   zone: ZoneUpdateOneRequiredInput
-  createdBy: UserUpdateOneRequiredWithoutCreated_parking_lotsInput
+  createdBy: UserUpdateOneWithoutCreated_parking_lotsInput
 }
 
 input ParkingLotUpdateWithWhereUniqueWithoutCreatedByInput {
@@ -1268,7 +1268,7 @@ type Tracking {
   vehicle_count: Int!
   bus_count: Int!
   passenger_count: Int!
-  createdBy: User!
+  createdBy: User
   updatedBy(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
 }
 
@@ -1288,7 +1288,7 @@ input TrackingCreateInput {
   vehicle_count: Int!
   bus_count: Int!
   passenger_count: Int!
-  createdBy: UserCreateOneWithoutCreated_trackingInput!
+  createdBy: UserCreateOneWithoutCreated_trackingInput
   updatedBy: UserCreateManyWithoutEdited_trackingInput
 }
 
@@ -1325,7 +1325,7 @@ input TrackingCreateWithoutUpdatedByInput {
   vehicle_count: Int!
   bus_count: Int!
   passenger_count: Int!
-  createdBy: UserCreateOneWithoutCreated_trackingInput!
+  createdBy: UserCreateOneWithoutCreated_trackingInput
 }
 
 type TrackingEdge {
@@ -1443,7 +1443,7 @@ input TrackingUpdateInput {
   vehicle_count: Int
   bus_count: Int
   passenger_count: Int
-  createdBy: UserUpdateOneRequiredWithoutCreated_trackingInput
+  createdBy: UserUpdateOneWithoutCreated_trackingInput
   updatedBy: UserUpdateManyWithoutEdited_trackingInput
 }
 
@@ -1517,7 +1517,7 @@ input TrackingUpdateWithoutUpdatedByDataInput {
   vehicle_count: Int
   bus_count: Int
   passenger_count: Int
-  createdBy: UserUpdateOneRequiredWithoutCreated_trackingInput
+  createdBy: UserUpdateOneWithoutCreated_trackingInput
 }
 
 input TrackingUpdateWithWhereUniqueWithoutCreatedByInput {
@@ -1980,31 +1980,39 @@ input UserUpdateManyWithWhereNestedInput {
   data: UserUpdateManyDataInput!
 }
 
-input UserUpdateOneRequiredWithoutCreated_airshowsInput {
+input UserUpdateOneWithoutCreated_airshowsInput {
   create: UserCreateWithoutCreated_airshowsInput
   update: UserUpdateWithoutCreated_airshowsDataInput
   upsert: UserUpsertWithoutCreated_airshowsInput
+  delete: Boolean
+  disconnect: Boolean
   connect: UserWhereUniqueInput
 }
 
-input UserUpdateOneRequiredWithoutCreated_parking_lotsInput {
+input UserUpdateOneWithoutCreated_parking_lotsInput {
   create: UserCreateWithoutCreated_parking_lotsInput
   update: UserUpdateWithoutCreated_parking_lotsDataInput
   upsert: UserUpsertWithoutCreated_parking_lotsInput
+  delete: Boolean
+  disconnect: Boolean
   connect: UserWhereUniqueInput
 }
 
-input UserUpdateOneRequiredWithoutCreated_trackingInput {
+input UserUpdateOneWithoutCreated_trackingInput {
   create: UserCreateWithoutCreated_trackingInput
   update: UserUpdateWithoutCreated_trackingDataInput
   upsert: UserUpsertWithoutCreated_trackingInput
+  delete: Boolean
+  disconnect: Boolean
   connect: UserWhereUniqueInput
 }
 
-input UserUpdateOneRequiredWithoutCreated_zonesInput {
+input UserUpdateOneWithoutCreated_zonesInput {
   create: UserCreateWithoutCreated_zonesInput
   update: UserUpdateWithoutCreated_zonesDataInput
   upsert: UserUpsertWithoutCreated_zonesInput
+  delete: Boolean
+  disconnect: Boolean
   connect: UserWhereUniqueInput
 }
 
@@ -2263,7 +2271,7 @@ type Zone {
   updatedAt: DateTime!
   name: String!
   lot_count: Int!
-  createdBy: User!
+  createdBy: User
   updatedBy(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
 }
 
@@ -2279,7 +2287,7 @@ input ZoneCreateInput {
   updatedAt: DateTime!
   name: String!
   lot_count: Int!
-  createdBy: UserCreateOneWithoutCreated_zonesInput!
+  createdBy: UserCreateOneWithoutCreated_zonesInput
   updatedBy: UserCreateManyWithoutEdited_zonesInput
 }
 
@@ -2313,7 +2321,7 @@ input ZoneCreateWithoutUpdatedByInput {
   updatedAt: DateTime!
   name: String!
   lot_count: Int!
-  createdBy: UserCreateOneWithoutCreated_zonesInput!
+  createdBy: UserCreateOneWithoutCreated_zonesInput
 }
 
 type ZoneEdge {
@@ -2422,7 +2430,7 @@ input ZoneUpdateDataInput {
   updatedAt: DateTime
   name: String
   lot_count: Int
-  createdBy: UserUpdateOneRequiredWithoutCreated_zonesInput
+  createdBy: UserUpdateOneWithoutCreated_zonesInput
   updatedBy: UserUpdateManyWithoutEdited_zonesInput
 }
 
@@ -2432,7 +2440,7 @@ input ZoneUpdateInput {
   updatedAt: DateTime
   name: String
   lot_count: Int
-  createdBy: UserUpdateOneRequiredWithoutCreated_zonesInput
+  createdBy: UserUpdateOneWithoutCreated_zonesInput
   updatedBy: UserUpdateManyWithoutEdited_zonesInput
 }
 
@@ -2512,7 +2520,7 @@ input ZoneUpdateWithoutUpdatedByDataInput {
   updatedAt: DateTime
   name: String
   lot_count: Int
-  createdBy: UserUpdateOneRequiredWithoutCreated_zonesInput
+  createdBy: UserUpdateOneWithoutCreated_zonesInput
 }
 
 input ZoneUpdateWithWhereUniqueWithoutCreatedByInput {

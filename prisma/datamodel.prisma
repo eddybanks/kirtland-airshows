@@ -4,7 +4,7 @@ type Airshow {
   updatedAt: DateTime!
   name: String!
   date: String!
-  createdBy: User! @relation(name: "AirshowsCreated")
+  createdBy: User @relation(name: "AirshowsCreated")
   updatedBy: [User] @relation(name: "AirshowsEdited")
 }
 
@@ -14,7 +14,7 @@ type Zone {
   updatedAt: DateTime!
   name: String!
   lot_count: Int!
-  createdBy: User! @relation(name: "ZonesCreated")
+  createdBy: User @relation(name: "ZonesCreated")
   updatedBy: [User] @relation(name: "ZonesEdited")
 }
 
@@ -28,7 +28,7 @@ type ParkingLot {
   estimated_travel_distance: Int
   estimated_travel_time: Int
   zone: Zone!
-  createdBy: User! @relation(name: "ParkingLotsCreated")
+  createdBy: User @relation(name: "ParkingLotsCreated")
   updatedBy: [User] @relation(name: "ParkingLotsEdited")
 }
 
@@ -53,7 +53,7 @@ type Tracking {
   vehicle_count: Int!
   bus_count: Int!
   passenger_count: Int!
-  createdBy: User! @relation(name: "TrackingCreated")
+  createdBy: User @relation(name: "TrackingCreated")
   updatedBy: [User] @relation(name: "TrackingEdited")
 }
 
